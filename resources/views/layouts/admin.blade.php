@@ -47,20 +47,24 @@
             <p class="mb-3 mt-8 px-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-paper/35">Contenus</p>
             <div class="space-y-1">
                 @foreach ($contentLinks as $link)
-                    <a href="{{ route($link['route']) }}" class="admin-nav-link {{ request()->routeIs($link['pattern']) ? 'admin-nav-link-active' : '' }}">
-                        <span class="admin-nav-dot"></span>
-                        {{ $link['label'] }}
-                    </a>
+                    @if (\Illuminate\Support\Facades\Route::has($link['route']))
+                        <a href="{{ route($link['route']) }}" class="admin-nav-link {{ request()->routeIs($link['pattern']) ? 'admin-nav-link-active' : '' }}">
+                            <span class="admin-nav-dot"></span>
+                            {{ $link['label'] }}
+                        </a>
+                    @endif
                 @endforeach
             </div>
 
             <p class="mb-3 mt-8 px-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-paper/35">Organisation</p>
             <div class="space-y-1">
                 @foreach ($organizationLinks as $link)
-                    <a href="{{ route($link['route']) }}" class="admin-nav-link {{ request()->routeIs($link['pattern']) ? 'admin-nav-link-active' : '' }}">
-                        <span class="admin-nav-dot"></span>
-                        {{ $link['label'] }}
-                    </a>
+                    @if (\Illuminate\Support\Facades\Route::has($link['route']))
+                        <a href="{{ route($link['route']) }}" class="admin-nav-link {{ request()->routeIs($link['pattern']) ? 'admin-nav-link-active' : '' }}">
+                            <span class="admin-nav-dot"></span>
+                            {{ $link['label'] }}
+                        </a>
+                    @endif
                 @endforeach
                 @if (auth()->user()?->isAdmin())
                     <a href="{{ route('admin.users.index') }}" class="admin-nav-link {{ request()->routeIs('admin.users.*') ? 'admin-nav-link-active' : '' }}">
