@@ -80,6 +80,47 @@
     </section>
     @endif
 
+    {{-- PARTENAIRES --}}
+    @if ($partners->isNotEmpty())
+    <section class="section-block section-partners">
+        <div class="container-content">
+            <div class="section-header-row reveal">
+                <div class="max-w-2xl">
+                    <p class="eyebrow mb-3">Ils nous font confiance</p>
+                    <h2 class="section-title">Des collaborations qui donnent de la portée à nos expertises.</h2>
+                </div>
+                <p class="max-w-sm text-sm leading-7 text-ink/55">GRIDD avance aux côtés d’institutions et d’organisations engagées pour un développement durable.</p>
+            </div>
+            <div class="partners-grid">
+                @foreach ($partners as $partner)
+                    @php $partnerUrl = $partner->url ?: null; @endphp
+                    @if ($partnerUrl)
+                    <a href="{{ $partnerUrl }}" target="_blank" rel="noopener noreferrer" class="partner-card reveal" aria-label="Visiter le site de {{ $partner->name }}">
+                    @else
+                    <div class="partner-card reveal">
+                    @endif
+                        <div class="partner-logo">
+                            @if ($partner->logo)
+                                <x-responsive-image :src="$partner->logo" :alt="$partner->name" class="h-full w-full object-contain" />
+                            @else
+                                <span>{{ mb_strtoupper(mb_substr($partner->name, 0, 1)) }}</span>
+                            @endif
+                        </div>
+                        <div class="flex min-w-0 items-center justify-between gap-3">
+                            <p class="truncate font-display text-sm font-semibold text-ink/75">{{ $partner->name }}</p>
+                            @if ($partnerUrl)<span class="partner-arrow" aria-hidden="true">↗</span>@endif
+                        </div>
+                    @if ($partnerUrl)
+                    </a>
+                    @else
+                    </div>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
     {{-- ACTUALITES --}}
     @if ($news->isNotEmpty())
     <section class="section-block section-alt">

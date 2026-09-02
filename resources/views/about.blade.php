@@ -12,7 +12,7 @@
     </div>
 </section>
 
-<section class="section-block">
+<section class="section-block" id="vision">
     <div class="container-content about-grid-2">
         <div class="info-card">
             <h2 class="info-card-title">Notre vision</h2>
@@ -25,7 +25,7 @@
     </div>
 </section>
 
-<section class="section-block section-alt">
+<section class="section-block section-alt" id="valeurs">
     <div class="container-content">
         <h2 class="section-title mb-10">Nos valeurs</h2>
         <div class="cards-grid-3">

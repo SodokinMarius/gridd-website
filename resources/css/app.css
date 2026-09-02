@@ -1571,3 +1571,88 @@
         display: flex;
     }
 }
+
+
+@layer components {
+    .section-partners {
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.45)),
+            radial-gradient(circle at 90% 20%, rgba(168,83,31,0.08), transparent 22rem);
+    }
+
+    .partners-grid {
+        @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-4;
+    }
+
+    .partner-card {
+        @apply flex min-h-[11rem] flex-col justify-between gap-6 rounded-[1.5rem] border border-white/80 bg-white/75 p-5 transition-all duration-300;
+        box-shadow: 0 14px 35px rgba(16, 32, 26, 0.06);
+        backdrop-filter: blur(16px);
+    }
+
+    a.partner-card:hover {
+        @apply border-primary-300/50 bg-white;
+        transform: translateY(-5px);
+        box-shadow: 0 22px 50px rgba(16, 32, 26, 0.12);
+    }
+
+    .partner-logo {
+        @apply flex h-20 items-center justify-center overflow-hidden rounded-2xl bg-stone-50 p-4;
+    }
+
+    .partner-logo img {
+        @apply max-h-full max-w-full;
+    }
+
+    .partner-logo > span {
+        @apply font-display text-3xl font-bold text-primary-700/40;
+    }
+
+    .partner-arrow {
+        @apply flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-primary-50 text-sm font-bold text-primary-700 transition-transform duration-200;
+    }
+
+    .partner-card:hover .partner-arrow {
+        transform: translate(2px, -2px);
+    }
+}
+
+
+@layer components {
+    .news-article-cover {
+        @apply aspect-[16/8] overflow-hidden rounded-[2rem] bg-stone-100;
+        box-shadow: var(--gridd-shadow);
+    }
+
+    .news-article-layout {
+        @apply grid gap-14 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start;
+    }
+
+    .news-gallery {
+        @apply rounded-[1.75rem] border border-white/80 bg-white/70 p-5 md:p-6;
+        box-shadow: var(--gridd-shadow-soft);
+        backdrop-filter: blur(16px);
+    }
+
+    .news-gallery-grid {
+        @apply grid gap-3 sm:grid-cols-2 lg:grid-cols-1;
+    }
+
+    .news-gallery-item {
+        @apply relative overflow-hidden rounded-2xl bg-stone-100;
+        aspect-ratio: 4 / 3;
+    }
+
+    .news-gallery-item img {
+        @apply transition-transform duration-500;
+    }
+
+    .news-gallery-item:hover img {
+        transform: scale(1.04);
+    }
+
+    .news-gallery-item figcaption {
+        @apply absolute inset-x-0 bottom-0 bg-ink/80 px-3 py-2 text-xs leading-5 text-paper/85;
+        backdrop-filter: blur(10px);
+    }
+}

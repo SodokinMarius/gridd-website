@@ -2,6 +2,7 @@
     $contentLinks = [
         ['label' => 'Bannière accueil', 'route' => 'admin.hero.index', 'pattern' => 'admin.hero.*'],
         ['label' => 'Réalisations', 'route' => 'admin.projects.index', 'pattern' => 'admin.projects.*'],
+        ['label' => 'Partenaires', 'route' => 'admin.partners.index', 'pattern' => 'admin.partners.*'],
         ['label' => 'Galerie', 'route' => 'admin.gallery.index', 'pattern' => 'admin.gallery.*'],
         ['label' => 'Actualités', 'route' => 'admin.news.index', 'pattern' => 'admin.news.*'],
     ];

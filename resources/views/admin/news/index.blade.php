@@ -15,6 +15,7 @@
             <tr>
                 <th class="px-4 py-3">Titre</th>
                 <th class="px-4 py-3">Publication</th>
+                <th class="px-4 py-3">Galerie</th>
                 <th class="px-4 py-3">Statut</th>
                 <th class="px-4 py-3"></th>
             </tr>
@@ -24,6 +25,7 @@
                 <tr>
                     <td class="px-4 py-3">{{ $article->title }}</td>
                     <td class="px-4 py-3">{{ $article->published_at?->format('d/m/Y') ?? '—' }}</td>
+                    <td class="px-4 py-3 text-ink/55">{{ $article->images->count() }} image(s)</td>
                     <td class="px-4 py-3">
                         @if (!$article->is_published)
                             Brouillon
@@ -42,7 +44,7 @@
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="4" class="px-4 py-6 text-center text-stone-500">Aucune actualité pour le moment.</td></tr>
+                <tr><td colspan="5" class="px-4 py-6 text-center text-stone-500">Aucune actualité pour le moment.</td></tr>
             @endforelse
         </tbody>
     </table>

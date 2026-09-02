@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             HeroSlideSeeder::class,
             TeamMemberSeeder::class,
             TestimonialSeeder::class,
+            PartnerSeeder::class,
         ]);
     }
 }

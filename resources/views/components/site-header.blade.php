@@ -1,9 +1,14 @@
 @php
     $links = [
         ['label' => 'Accueil', 'url' => route('home'), 'active' => request()->routeIs('home')],
-        ['label' => 'À propos', 'url' => route('about'), 'active' => request()->routeIs('about')],
         ['label' => 'Services', 'url' => route('services'), 'active' => request()->routeIs('services')],
         ['label' => 'Réalisations', 'url' => route('projects.index'), 'active' => request()->routeIs('projects.*')],
+    ];
+
+    $aboutLinks = [
+        ['label' => 'Vision & mission', 'url' => route('about').'#vision'],
+        ['label' => 'Valeurs', 'url' => route('about').'#valeurs'],
+        ['label' => 'Direction & équipe', 'url' => route('about').'#equipe'],
     ];
 
     $resourceLinks = [
@@ -12,6 +17,7 @@
         ['label' => 'Carrières', 'url' => route('jobs.index'), 'active' => request()->routeIs('jobs.*')],
     ];
 
+    $aboutActive = request()->routeIs('about');
     $resourcesActive = collect($resourceLinks)->contains('active', true);
 @endphp
 
@@ -38,6 +44,24 @@
 
                     <div class="nav-dropdown" data-submenu>
                         <button type="button"
+                                class="nav-link nav-dropdown-trigger {{ $aboutActive ? 'nav-link-active' : '' }}"
+                                data-submenu-toggle
+                                aria-expanded="false"
+                                aria-haspopup="true">
+                            À propos
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                <path d="m4 6 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <div class="nav-dropdown-panel" data-submenu-panel>
+                            @foreach ($aboutLinks as $link)
+                                <a href="{{ $link['url'] }}" class="nav-dropdown-link">{{ $link['label'] }}</a>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="nav-dropdown" data-submenu>
+                        <button type="button"
                                 class="nav-link nav-dropdown-trigger {{ $resourcesActive ? 'nav-link-active' : '' }}"
                                 data-submenu-toggle
                                 aria-expanded="false"
@@ -58,9 +82,7 @@
                 </nav>
 
                 <div class="header-actions">
-                    <a href="{{ route('contact') }}" class="header-cta">
-                        Nous contacter
-                    </a>
+                    <a href="{{ route('contact') }}" class="header-cta">Nous contacter</a>
                 </div>
 
                 <button type="button" class="menu-button" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
@@ -79,25 +101,31 @@
                         </a>
                     @endforeach
 
-                    <details class="mobile-menu-group" {{ $resourcesActive ? 'open' : '' }}>
+                    <details class="mobile-menu-group" {{ $aboutActive ? 'open' : '' }}>
                         <summary class="mobile-nav-link mobile-menu-summary">
-                            <span>Ressources</span>
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                                <path d="m4 6 4 4 4-4" />
-                            </svg>
+                            <span>À propos</span>
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
                         </summary>
                         <div class="mobile-submenu">
-                            @foreach ($resourceLinks as $link)
-                                <a href="{{ $link['url'] }}" class="mobile-nav-link {{ $link['active'] ? 'mobile-nav-link-active' : '' }}">
-                                    {{ $link['label'] }}
-                                </a>
+                            @foreach ($aboutLinks as $link)
+                                <a href="{{ $link['url'] }}" class="mobile-nav-link">{{ $link['label'] }}</a>
                             @endforeach
                         </div>
                     </details>
 
-                    <a href="{{ route('contact') }}" class="mobile-cta">
-                        Nous contacter
-                    </a>
+                    <details class="mobile-menu-group" {{ $resourcesActive ? 'open' : '' }}>
+                        <summary class="mobile-nav-link mobile-menu-summary">
+                            <span>Ressources</span>
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+                        </summary>
+                        <div class="mobile-submenu">
+                            @foreach ($resourceLinks as $link)
+                                <a href="{{ $link['url'] }}" class="mobile-nav-link {{ $link['active'] ? 'mobile-nav-link-active' : '' }}">{{ $link['label'] }}</a>
+                            @endforeach
+                        </div>
+                    </details>
+
+                    <a href="{{ route('contact') }}" class="mobile-cta">Nous contacter</a>
                 </nav>
             </div>
         </div>
