@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\News;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class NewsSeeder extends Seeder
@@ -28,11 +29,19 @@ class NewsSeeder extends Seeder
             ],
         ];
 
-        foreach ($items as $data) {
-            News::firstOrCreate(
+        $seedImages = glob(base_path('storage_seed_images/*.jpg')) ?: [];
+
+        foreach ($items as $index => $data) {
+            $news = News::firstOrCreate(
                 ['slug' => Str::slug($data['title'])],
                 $data + ['slug' => Str::slug($data['title']), 'is_published' => true]
             );
+
+            if (! $news->cover_image && isset($seedImages[$index])) {
+                $coverPath = 'news/'.Str::random(12).'.jpg';
+                Storage::disk('public')->put($coverPath, file_get_contents($seedImages[$index]));
+                $news->update(['cover_image' => $coverPath]);
+            }
         }
     }
 }

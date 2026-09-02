@@ -3,18 +3,20 @@
         ['label' => 'Accueil', 'url' => route('home'), 'active' => request()->routeIs('home')],
         ['label' => 'Services', 'url' => route('services'), 'active' => request()->routeIs('services')],
         ['label' => 'Réalisations', 'url' => route('projects.index'), 'active' => request()->routeIs('projects.*')],
+        ['label' => 'Carrières', 'url' => route('jobs.index'), 'active' => request()->routeIs('jobs.*')],
     ];
 
     $aboutLinks = [
+        ['label' => 'Historique', 'url' => route('about').'#historique'],
         ['label' => 'Vision & mission', 'url' => route('about').'#vision'],
         ['label' => 'Valeurs', 'url' => route('about').'#valeurs'],
+        ['label' => 'Mot du Directeur', 'url' => route('about').'#directeur'],
         ['label' => 'Direction & équipe', 'url' => route('about').'#equipe'],
     ];
 
     $resourceLinks = [
         ['label' => 'Galerie', 'url' => route('gallery.index'), 'active' => request()->routeIs('gallery.*')],
         ['label' => 'Actualités', 'url' => route('news.index'), 'active' => request()->routeIs('news.*')],
-        ['label' => 'Carrières', 'url' => route('jobs.index'), 'active' => request()->routeIs('jobs.*')],
     ];
 
     $aboutActive = request()->routeIs('about');

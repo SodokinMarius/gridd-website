@@ -13,12 +13,12 @@
 
 <div class="form-row mb-6">
     <div class="form-field">
-        <label for="cover_image">Image de couverture</label>
-        <input id="cover_image" type="file" name="cover_image" accept="image/*">
+        <label for="cover_image">Image de couverture <span class="text-clay-600">*</span></label>
+        <input id="cover_image" type="file" name="cover_image" accept="image/*" {{ !$news?->cover_image ? 'required' : '' }}>
         @if (($news->cover_image ?? null))
             <img src="{{ \App\Support\Media::url($news->cover_image) }}" alt="Couverture de {{ $news->title }}" class="mt-3 h-24 w-40 rounded-xl object-cover">
         @endif
-        <p class="mt-1 text-xs text-ink/45">Affichée dans les cartes et en tête de l’article.</p>
+        <p class="mt-1 text-xs text-ink/45">Obligatoire pour toute actualité. Affichée dans les cartes et en tête de l’article.</p>
     </div>
     <div class="form-field">
         <label for="published_at">Date de publication</label>

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<section class="page-hero">
+<section class="page-hero" id="historique">
     <div class="container-content max-w-3xl">
         <p class="eyebrow mb-3">À propos de nous</p>
         <h1 class="page-title">Une expertise au service du développement durable.</h1>
@@ -39,7 +39,7 @@
     </div>
 </section>
 
-<section class="section-block">
+<section class="section-block" id="directeur">
     <div class="container-content">
         <p class="eyebrow mb-3">Mot du Directeur</p>
         <div class="director-block">

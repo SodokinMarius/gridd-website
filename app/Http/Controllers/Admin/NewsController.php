@@ -27,7 +27,7 @@ class NewsController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $data = $this->validateData($request);
+        $data = $this->validateData($request, true);
         $data['slug'] = $this->uniqueSlug($data['title']);
         $data['is_published'] = $request->boolean('is_published');
 
@@ -50,7 +50,7 @@ class NewsController extends Controller
 
     public function update(Request $request, News $news): RedirectResponse
     {
-        $data = $this->validateData($request, $news->id);
+        $data = $this->validateData($request, ! $news->cover_image);
         $data['is_published'] = $request->boolean('is_published');
 
         if ($data['title'] !== $news->title) {
@@ -93,13 +93,13 @@ class NewsController extends Controller
         return back()->with('status', 'Actualité supprimée.');
     }
 
-    private function validateData(Request $request, ?int $ignoreId = null): array
+    private function validateData(Request $request, bool $coverRequired = false): array
     {
         return $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
             'published_at' => ['nullable', 'date'],
-            'cover_image' => ['nullable', 'image', 'max:4096'],
+            'cover_image' => [$coverRequired ? 'required' : 'nullable', 'image', 'max:4096'],
             'images' => ['nullable', 'array', 'max:12'],
             'images.*' => ['image', 'max:4096'],
         ]);

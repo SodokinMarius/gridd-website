@@ -1581,11 +1581,13 @@
     }
 
     .partners-grid {
-        @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-4;
+        @apply flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(46, 157, 48, 0.45) rgba(16, 32, 26, 0.08);
     }
 
     .partner-card {
-        @apply flex min-h-[11rem] flex-col justify-between gap-6 rounded-[1.5rem] border border-white/80 bg-white/75 p-5 transition-all duration-300;
+        @apply flex min-h-[11rem] flex-[0_0_min(18rem,78vw)] snap-start flex-col justify-between gap-6 rounded-[1.5rem] border border-white/80 bg-white/75 p-5 transition-all duration-300;
         box-shadow: 0 14px 35px rgba(16, 32, 26, 0.06);
         backdrop-filter: blur(16px);
     }
