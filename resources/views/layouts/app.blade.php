@@ -26,7 +26,7 @@
         </div>
     @endif
 
-    <main id="main-content">
+    <main id="main-content" class="page-transition">
         @yield('content')
     </main>
 
