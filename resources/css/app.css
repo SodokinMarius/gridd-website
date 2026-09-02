@@ -1294,3 +1294,280 @@
         animation: none;
     }
 }
+
+
+/* Navigation publique : largeur stable et libellés sur une seule ligne. */
+@layer components {
+    .site-header-container {
+        @apply mx-auto w-full max-w-[96rem] px-4 sm:px-6 lg:px-8;
+    }
+
+    .desktop-nav {
+        @apply flex-1 justify-center gap-0.5 xl:gap-1;
+    }
+
+    .nav-link {
+        @apply whitespace-nowrap px-3 py-2 xl:px-3.5;
+    }
+
+    .header-actions {
+        @apply flex flex-shrink-0 items-center;
+    }
+
+    .nav-dropdown {
+        @apply relative;
+    }
+
+    .nav-dropdown-trigger {
+        @apply cursor-pointer border-0 bg-transparent;
+    }
+
+    .nav-dropdown-trigger svg {
+        @apply h-4 w-4 transition-transform duration-200;
+    }
+
+    .nav-dropdown.is-open .nav-dropdown-trigger svg,
+    .nav-dropdown:hover .nav-dropdown-trigger svg,
+    .nav-dropdown:focus-within .nav-dropdown-trigger svg {
+        transform: rotate(180deg);
+    }
+
+    .nav-dropdown-panel {
+        @apply invisible absolute right-0 top-full z-50 mt-3 min-w-52 translate-y-2 rounded-2xl border border-white/70 bg-white/95 p-2 opacity-0 shadow-2xl transition-all duration-200;
+        backdrop-filter: blur(18px);
+    }
+
+    .nav-dropdown.is-open .nav-dropdown-panel,
+    .nav-dropdown:hover .nav-dropdown-panel,
+    .nav-dropdown:focus-within .nav-dropdown-panel {
+        @apply visible translate-y-0 opacity-100;
+    }
+
+    .nav-dropdown-link {
+        @apply block whitespace-nowrap rounded-xl px-4 py-3 text-sm font-semibold text-ink/70 transition-colors duration-200;
+    }
+
+    .nav-dropdown-link:hover,
+    .nav-dropdown-link-active {
+        @apply bg-primary-50 text-primary-700;
+    }
+
+    .mobile-menu-group {
+        @apply rounded-2xl;
+    }
+
+    .mobile-menu-summary {
+        @apply flex cursor-pointer list-none items-center justify-between;
+    }
+
+    .mobile-menu-summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .mobile-menu-summary svg {
+        @apply h-4 w-4 transition-transform duration-200;
+    }
+
+    .mobile-menu-group[open] .mobile-menu-summary svg {
+        transform: rotate(180deg);
+    }
+
+    .mobile-submenu {
+        @apply ml-3 border-l border-ink/10 pl-3;
+    }
+
+    .mobile-submenu .mobile-nav-link {
+        @apply py-2.5 text-ink/60;
+    }
+
+    .hero-slide-bg img {
+        object-position: center center;
+    }
+
+    .hero-slide-bg {
+        @apply flex items-center justify-center;
+    }
+
+    .hero-slide-bg img {
+        @apply object-center;
+    }
+
+    /* Dashboard : espace administratif plus lisible et plus confidentiel. */
+    .admin-shell {
+        background:
+            radial-gradient(circle at 100% 0%, rgba(46, 157, 48, 0.08), transparent 28rem),
+            #f5f3ef;
+    }
+
+    .admin-sidebar {
+        @apply border-r border-white/10 bg-ink;
+        box-shadow: 18px 0 50px rgba(16, 32, 26, 0.08);
+    }
+
+    .admin-main-header {
+        @apply sticky top-0 z-30 border-b border-ink/[7%] bg-white/80;
+        backdrop-filter: blur(18px);
+    }
+
+    .admin-page {
+        @apply mx-auto w-full max-w-[100rem] p-5 md:p-8 xl:p-10;
+    }
+
+    .admin-stat-card {
+        @apply relative isolate overflow-hidden rounded-[1.5rem] border border-white/80 bg-white p-5 transition-all duration-300 md:p-6;
+        box-shadow: 0 16px 40px rgba(16, 32, 26, 0.07);
+    }
+
+    .admin-stat-card::after {
+        content: "";
+        @apply pointer-events-none absolute -right-10 -top-10 -z-10 h-28 w-28 rounded-full bg-primary-50 blur-2xl transition-transform duration-500;
+    }
+
+    .admin-stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 55px rgba(16, 32, 26, 0.12);
+    }
+
+    .admin-stat-card:hover::after {
+        transform: scale(1.35);
+    }
+
+    .admin-stat-icon {
+        @apply flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-50 text-primary-700;
+    }
+
+    .admin-stat-value {
+        @apply mt-5 block font-display text-4xl font-bold tracking-[-0.06em] text-ink;
+    }
+
+    .admin-panel {
+        @apply rounded-[1.5rem] border border-white/80 bg-white p-5 md:p-6;
+        box-shadow: 0 16px 40px rgba(16, 32, 26, 0.06);
+    }
+
+    .admin-chart {
+        @apply flex h-64 items-end gap-2 rounded-2xl bg-stone-50 p-4 md:gap-3 md:p-5;
+    }
+
+    .admin-chart-bar {
+        @apply min-w-0 flex-1 rounded-t-xl bg-gradient-to-t from-primary-700 to-primary-300 transition-all duration-500;
+        min-height: 0.5rem;
+    }
+
+    .admin-chart-bar:hover {
+        filter: saturate(1.2) brightness(1.05);
+        transform: translateY(-4px);
+    }
+
+    .admin-chart-label {
+        @apply mt-3 block truncate text-center text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-ink/45;
+    }
+
+    .admin-activity-item {
+        @apply flex items-center justify-between gap-4 border-b border-ink/[7%] py-4 last:border-0;
+    }
+
+    .admin-status {
+        @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold;
+    }
+
+    .admin-status::before {
+        content: "";
+        @apply h-1.5 w-1.5 rounded-full bg-current;
+    }
+
+    .admin-status-published {
+        @apply bg-primary-50 text-primary-700;
+    }
+
+    .admin-status-draft {
+        @apply bg-stone-100 text-stone-500;
+    }
+
+    .admin-status-warning {
+        @apply bg-clay-50 text-clay-600;
+    }
+
+    .admin-quick-action {
+        @apply flex items-center justify-between rounded-2xl border border-ink/[8%] bg-stone-50 px-4 py-3 text-sm font-semibold text-ink transition-all duration-200;
+    }
+
+    .admin-quick-action:hover {
+        @apply border-primary-300 bg-primary-50 text-primary-700;
+        transform: translateX(3px);
+    }
+}
+
+@media (max-width: 1279px) and (min-width: 1024px) {
+    .brand-copy {
+        display: none;
+    }
+
+    .nav-link {
+        @apply px-2 text-[0.78rem];
+    }
+
+    .header-cta {
+        @apply px-4 text-[0.78rem];
+    }
+}
+
+@media (max-width: 1023px) {
+    .site-header-container {
+        @apply px-4;
+    }
+}
+
+
+@layer components {
+    .admin-nav-link {
+        @apply flex items-center gap-3 rounded-2xl px-3 py-3 font-semibold text-paper/55 transition-all duration-200;
+    }
+
+    .admin-nav-link:hover {
+        @apply bg-white/5 text-paper;
+        transform: translateX(2px);
+    }
+
+    .admin-nav-link-active {
+        @apply bg-primary-500/15 text-paper;
+        box-shadow: inset 3px 0 0 var(--gridd-green);
+    }
+
+    .admin-nav-link svg {
+        @apply h-[1.1rem] w-[1.1rem] flex-shrink-0 text-paper/45;
+    }
+
+    .admin-nav-link-active svg {
+        @apply text-primary-300;
+    }
+
+    .admin-nav-dot {
+        @apply h-1.5 w-1.5 flex-shrink-0 rounded-full bg-paper/25 transition-colors duration-200;
+    }
+
+    .admin-nav-link-active .admin-nav-dot,
+    .admin-nav-link:hover .admin-nav-dot {
+        @apply bg-primary-300;
+    }
+
+    .admin-bottom-link {
+        @apply flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold text-paper/50 transition-colors duration-200;
+    }
+
+    .admin-bottom-link:hover {
+        @apply bg-white/5 text-paper;
+    }
+}
+
+
+@media (max-width: 1023px) {
+    .desktop-nav,
+    .header-actions {
+        display: none;
+    }
+
+    .menu-button {
+        display: flex;
+    }
+}
