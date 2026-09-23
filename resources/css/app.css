@@ -904,6 +904,15 @@
         transform: translateY(-2px);
     }
 
+    .social-link-dark {
+        @apply inline-flex h-10 w-10 items-center justify-center rounded-full border border-paper/15 bg-paper/[8%] text-paper/70 transition-all duration-300;
+    }
+
+    .social-link-dark:hover {
+        @apply border-primary-300/60 bg-primary-500/15 text-primary-300;
+        transform: translateY(-2px);
+    }
+
     .director-block {
         @apply relative grid gap-8 overflow-hidden rounded-[2rem] border bg-white/[72%] p-6 md:grid-cols-[280px_1fr] md:gap-12 md:p-10;
         border-color: rgba(255,255,255,0.72);
@@ -1680,7 +1689,7 @@
     }
 
     .services-hero-title {
-        @apply max-w-3xl font-display text-4xl font-bold leading-[1.02] tracking-[-0.06em] md:text-6xl lg:text-7xl;
+        @apply max-w-3xl font-display text-4xl font-bold leading-[1.02] tracking-[-0.06em] text-paper md:text-6xl lg:text-7xl;
     }
 
     .services-hero-lead {
@@ -1827,5 +1836,41 @@
         .service-detail-content {
             @apply gap-6;
         }
+    }
+}
+
+@layer components {
+    /* Harmonisation pages contact / réalisations / carrières */
+
+    .filter-pill {
+        @apply inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-300;
+        border-color: rgba(16, 32, 26, 0.14);
+        background: rgba(255, 255, 255, 0.6);
+        color: rgba(16, 32, 26, 0.68);
+    }
+
+    .filter-pill:hover {
+        border-color: rgba(46, 157, 48, 0.4);
+        color: var(--gridd-ink);
+    }
+
+    .filter-pill-active,
+    .filter-pill-active:hover {
+        color: var(--gridd-paper);
+        border-color: var(--gridd-ink);
+        background: var(--gridd-ink);
+    }
+
+    .job-card {
+        @apply relative flex flex-wrap items-center justify-between gap-4 overflow-hidden rounded-[1.75rem] border bg-white/[72%] p-6 transition-all duration-300 md:p-7;
+        border-color: rgba(255, 255, 255, 0.72);
+        box-shadow: var(--gridd-shadow-soft);
+        backdrop-filter: blur(18px);
+    }
+
+    .job-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(46, 157, 48, 0.22);
+        box-shadow: var(--gridd-shadow);
     }
 }

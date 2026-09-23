@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Nos services — GRIDD Consulting et Services')
+@section('title', 'Nos services - GRIDD Consulting et Services')
 
 @section('content')
 <section class="services-hero">
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <div class="service-detail-content">
-                            <p class="service-detail-intro">Une approche intégrée pour éclairer les décisions, anticiper les risques et accompagner la mise en œuvre.</p>
+                            <p class="service-detail-intro">{{ $pole['intro'] }}</p>
                             <ul class="service-detail-list">
                                 @foreach ($pole['items'] as $item)
                                     <li><span aria-hidden="true">＋</span>{{ $item }}</li>

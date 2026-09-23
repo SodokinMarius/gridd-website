@@ -69,6 +69,7 @@
             <div class="hero-dots" role="tablist">
                 @foreach ($slides as $index => $slide)
                     <button type="button"
+                            role="tab"
                             class="hero-dot {{ $index === 0 ? 'is-active' : '' }}"
                             data-carousel-dot="{{ $index }}"
                             aria-label="Aller à la slide {{ $index + 1 }}"
@@ -97,7 +98,7 @@
             <div class="hero-slide-text">
                 <div class="hero-chip">
                     <span></span>
-                    Bureau d’études — Bénin & Afrique de l’Ouest
+                    Bureau d’études - Bénin & Afrique de l’Ouest
                 </div>
 
                 <h1 class="hero-slide-title">Nous mesurons le terrain pour construire l’avenir durable.</h1>

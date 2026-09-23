@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Actualités — GRIDD Consulting et Services')
+@section('title', 'Actualités - GRIDD Consulting et Services')
 
 @section('content')
 <section class="page-hero">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'GRIDD Consulting et Services — Bureau d\'études Bénin & Afrique de l\'Ouest')
+@section('title', 'GRIDD Consulting et Services - Bureau d\'études Bénin & Afrique de l\'Ouest')
 
 @section('content')
 

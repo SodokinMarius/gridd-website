@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $news->title.' — GRIDD Consulting et Services')
+@section('title', $news->title.' - GRIDD Consulting et Services')
 
 @section('content')
 <section class="page-hero">

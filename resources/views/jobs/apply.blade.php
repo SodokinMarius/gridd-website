@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Postuler — '.$job->title)
+@section('title', 'Postuler - '.$job->title)
 
 @section('content')
 
@@ -51,7 +51,7 @@
                 <textarea id="cover_letter" name="cover_letter" rows="6">{{ old('cover_letter') }}</textarea>
             </div>
             <div class="form-field">
-                <label for="cv">CV (PDF, DOC ou DOCX — max 5 Mo)</label>
+                <label for="cv">CV (PDF, DOC ou DOCX - max 5 Mo)</label>
                 <input id="cv" type="file" name="cv" accept=".pdf,.doc,.docx" required>
             </div>
             <div class="flex flex-wrap gap-4 items-center">

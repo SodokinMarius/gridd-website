@@ -4,6 +4,7 @@ return [
     [
         'pole' => "Études, Audits et Expertises",
         'theme' => 'green',
+        'intro' => "Diagnostiquer les enjeux environnementaux et sociaux, évaluer les risques et éclairer la décision par une expertise rigoureuse et documentée.",
         'items' => [
             "Études d'impact environnemental et social",
             "Études environnementales stratégiques",
@@ -21,6 +22,7 @@ return [
     [
         'pole' => "Maîtrise d'œuvre et Agence d'Exécution de Travaux",
         'theme' => 'clay',
+        'intro' => "Piloter la conception et l'exécution des ouvrages, du dimensionnement technique jusqu'à la réception, avec une exigence constante de qualité et de délais.",
         'items' => [
             "Conception générale des ouvrages",
             "Dimensionnement",

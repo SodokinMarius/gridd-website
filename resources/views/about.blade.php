@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "À propos — GRIDD Consulting et Services")
+@section('title', "À propos - GRIDD Consulting et Services")
 
 @section('content')
 
