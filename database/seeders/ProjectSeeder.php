@@ -13,7 +13,7 @@ class ProjectSeeder extends Seeder
     {
         $projects = [
             [
-                'title' => "Étude d'impact environnemental et social — Corridor routier",
+                'title' => "Étude d'impact environnemental et social - Corridor routier",
                 'country' => 'Bénin',
                 'client' => "Ministère du Cadre de Vie",
                 'year' => 2024,

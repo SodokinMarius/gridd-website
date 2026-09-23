@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', "À propos — GRIDD Consulting et Services")
+@section('title', "À propos - GRIDD Consulting et Services")
 
 @section('content')
 
-<section class="page-hero">
+<section class="page-hero" id="historique">
     <div class="container-content max-w-3xl">
         <p class="eyebrow mb-3">À propos de nous</p>
         <h1 class="page-title">Une expertise au service du développement durable.</h1>
@@ -12,7 +12,7 @@
     </div>
 </section>
 
-<section class="section-block">
+<section class="section-block" id="vision">
     <div class="container-content about-grid-2">
         <div class="info-card">
             <h2 class="info-card-title">Notre vision</h2>
@@ -25,7 +25,7 @@
     </div>
 </section>
 
-<section class="section-block section-alt">
+<section class="section-block section-alt" id="valeurs">
     <div class="container-content">
         <h2 class="section-title mb-10">Nos valeurs</h2>
         <div class="cards-grid-3">
@@ -39,7 +39,7 @@
     </div>
 </section>
 
-<section class="section-block">
+<section class="section-block" id="directeur">
     <div class="container-content">
         <p class="eyebrow mb-3">Mot du Directeur</p>
         <div class="director-block">

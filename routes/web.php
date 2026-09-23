@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\HeroSlideController as AdminHeroSlideController;
 use App\Http\Controllers\Admin\JobPostingController as AdminJobPostingController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\PartnerController as AdminPartnerController;
 use App\Http\Controllers\Admin\TeamMemberController as AdminTeamMemberController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -70,6 +71,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('hero', AdminHeroSlideController::class)->except(['show']);
 
         Route::resource('projects', AdminProjectController::class)->except(['show']);
+        Route::resource('partners', AdminPartnerController::class)->except(['show']);
         Route::delete('project-images/{image}', [AdminProjectController::class, 'destroyImage'])->name('projects.images.destroy');
 
         Route::get('gallery', [AdminGalleryController::class, 'index'])->name('gallery.index');
@@ -79,6 +81,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('gallery/{image}', [AdminGalleryController::class, 'destroy'])->name('gallery.destroy');
 
         Route::resource('news', AdminNewsController::class)->except(['show']);
+        Route::delete('news-images/{image}', [AdminNewsController::class, 'destroyImage'])->name('news.images.destroy');
         Route::resource('jobs', AdminJobPostingController::class)->except(['show']);
         Route::resource('team', AdminTeamMemberController::class)->except(['show']);
         Route::resource('testimonials', AdminTestimonialController::class)->except(['show']);

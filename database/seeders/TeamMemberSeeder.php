@@ -12,9 +12,9 @@ class TeamMemberSeeder extends Seeder
     public function run(): void
     {
         $members = [
-            ['first_name' => 'Koffi', 'last_name' => 'Mensah', 'position' => 'Directeur Général', 'order' => 1],
+            ['first_name' => 'Innocent', 'last_name' => 'AKPAKA', 'position' => 'Directeur Général', 'order' => 1],
             ['first_name' => 'Aminata', 'last_name' => 'Diallo', 'position' => 'Responsable Études Environnementales', 'order' => 2],
-            ['first_name' => 'Jean-Baptiste', 'last_name' => 'Agbessi', 'position' => 'Chef de projet infrastructures', 'order' => 3],
+            ['first_name' => 'Germain', 'last_name' => 'NAGONOU', 'position' => 'Chef de projet infrastructures', 'order' => 3],
             ['first_name' => 'Fatou', 'last_name' => 'Sow', 'position' => 'Ingénieure SIG & Cartographie', 'order' => 4],
         ];
 

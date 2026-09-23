@@ -17,7 +17,7 @@ class HeroSlideSeeder extends Seeder
 
         $slides = [
             [
-                'eyebrow' => "Bureau d'études — Bénin & Afrique de l'Ouest",
+                'eyebrow' => "Bureau d'études - Bénin & Afrique de l'Ouest",
                 'title' => "Nous mesurons le terrain pour construire l'avenir durable.",
                 'subtitle' => 'GRIDD Consulting et Services accompagne institutions, entreprises et collectivités dans leurs évaluations environnementales et sociales.',
                 'button_text' => 'Découvrir nos services',

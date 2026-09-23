@@ -1,18 +1,135 @@
+@php
+    $links = [
+        ['label' => 'Accueil', 'url' => route('home'), 'active' => request()->routeIs('home')],
+        ['label' => 'Services', 'url' => route('services'), 'active' => request()->routeIs('services')],
+        ['label' => 'Réalisations', 'url' => route('projects.index'), 'active' => request()->routeIs('projects.*')],
+        ['label' => 'Carrières', 'url' => route('jobs.index'), 'active' => request()->routeIs('jobs.*')],
+    ];
+
+    $aboutLinks = [
+        ['label' => 'Historique', 'url' => route('about').'#historique'],
+        ['label' => 'Vision & mission', 'url' => route('about').'#vision'],
+        ['label' => 'Valeurs', 'url' => route('about').'#valeurs'],
+        ['label' => 'Mot du Directeur', 'url' => route('about').'#directeur'],
+        ['label' => 'Direction & équipe', 'url' => route('about').'#equipe'],
+    ];
+
+    $resourceLinks = [
+        ['label' => 'Galerie', 'url' => route('gallery.index'), 'active' => request()->routeIs('gallery.*')],
+        ['label' => 'Actualités', 'url' => route('news.index'), 'active' => request()->routeIs('news.*')],
+    ];
+
+    $aboutActive = request()->routeIs('about');
+    $resourcesActive = collect($resourceLinks)->contains('active', true);
+@endphp
+
 <header class="site-header" data-site-header>
-    <div class="container-content flex items-center justify-between py-4">
-        <a href="{{ route('home') }}">
-            <img src="{{ asset('images/logo.png') }}" alt="GRIDD Consulting et Services" class="h-10 w-auto">
-        </a>
-        <nav class="hidden lg:flex items-center gap-8">
-            <a href="{{ route('home') }}" class="nav-link">Accueil</a>
-            <a href="{{ route('about') }}" class="nav-link">À propos</a>
-            <a href="{{ route('about') }}#equipe" class="nav-link">Équipe</a>
-            <a href="{{ route('services') }}" class="nav-link">Services</a>
-            <a href="{{ route('projects.index') }}" class="nav-link">Réalisations</a>
-            <a href="{{ route('gallery.index') }}" class="nav-link">Galerie</a>
-            <a href="{{ route('news.index') }}" class="nav-link">Actualités</a>
-            <a href="{{ route('jobs.index') }}" class="nav-link">Postes vacants</a>
-        </nav>
-        <a href="{{ route('contact') }}" class="btn-primary !py-2.5 !px-5 text-sm">Nous contacter</a>
+    <div class="site-header-container">
+        <div class="header-shell">
+            <div class="header-row">
+                <a href="{{ route('home') }}" class="brand-link" aria-label="Accueil GRIDD Consulting et Services">
+                    <span class="brand-logo">
+                        <img src="{{ asset('images/logo.png') }}" alt="GRIDD Consulting et Services">
+                    </span>
+                    <span class="brand-copy">
+                        <span class="brand-name">GRIDD</span>
+                        <span class="brand-subtitle">Consulting & Services</span>
+                    </span>
+                </a>
+
+                <nav class="desktop-nav" aria-label="Navigation principale">
+                    @foreach ($links as $link)
+                        <a href="{{ $link['url'] }}" class="nav-link {{ $link['active'] ? 'nav-link-active' : '' }}">
+                            {{ $link['label'] }}
+                        </a>
+                    @endforeach
+
+                    <div class="nav-dropdown" data-submenu>
+                        <button type="button"
+                                class="nav-link nav-dropdown-trigger {{ $aboutActive ? 'nav-link-active' : '' }}"
+                                data-submenu-toggle
+                                aria-expanded="false"
+                                aria-haspopup="true">
+                            À propos
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                <path d="m4 6 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <div class="nav-dropdown-panel" data-submenu-panel>
+                            @foreach ($aboutLinks as $link)
+                                <a href="{{ $link['url'] }}" class="nav-dropdown-link">{{ $link['label'] }}</a>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="nav-dropdown" data-submenu>
+                        <button type="button"
+                                class="nav-link nav-dropdown-trigger {{ $resourcesActive ? 'nav-link-active' : '' }}"
+                                data-submenu-toggle
+                                aria-expanded="false"
+                                aria-haspopup="true">
+                            Ressources
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                <path d="m4 6 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <div class="nav-dropdown-panel" data-submenu-panel>
+                            @foreach ($resourceLinks as $link)
+                                <a href="{{ $link['url'] }}" class="nav-dropdown-link {{ $link['active'] ? 'nav-dropdown-link-active' : '' }}">
+                                    {{ $link['label'] }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="{{ route('contact') }}" class="header-cta">Nous contacter</a>
+                </div>
+
+                <button type="button" class="menu-button" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
+                    <span class="sr-only">Ouvrir le menu</span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="mobile-panel" data-mobile-menu>
+                <nav class="mobile-nav" aria-label="Navigation mobile">
+                    @foreach ($links as $link)
+                        <a href="{{ $link['url'] }}" class="mobile-nav-link {{ $link['active'] ? 'mobile-nav-link-active' : '' }}">
+                            {{ $link['label'] }}
+                        </a>
+                    @endforeach
+
+                    <details class="mobile-menu-group" {{ $aboutActive ? 'open' : '' }}>
+                        <summary class="mobile-nav-link mobile-menu-summary">
+                            <span>À propos</span>
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+                        </summary>
+                        <div class="mobile-submenu">
+                            @foreach ($aboutLinks as $link)
+                                <a href="{{ $link['url'] }}" class="mobile-nav-link">{{ $link['label'] }}</a>
+                            @endforeach
+                        </div>
+                    </details>
+
+                    <details class="mobile-menu-group" {{ $resourcesActive ? 'open' : '' }}>
+                        <summary class="mobile-nav-link mobile-menu-summary">
+                            <span>Ressources</span>
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+                        </summary>
+                        <div class="mobile-submenu">
+                            @foreach ($resourceLinks as $link)
+                                <a href="{{ $link['url'] }}" class="mobile-nav-link {{ $link['active'] ? 'mobile-nav-link-active' : '' }}">{{ $link['label'] }}</a>
+                            @endforeach
+                        </div>
+                    </details>
+
+                    <a href="{{ route('contact') }}" class="mobile-cta">Nous contacter</a>
+                </nav>
+            </div>
+        </div>
     </div>
 </header>

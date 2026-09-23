@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $project->title.' — GRIDD Consulting et Services')
+@section('title', $project->title.' - GRIDD Consulting et Services')
 
 @section('content')
 

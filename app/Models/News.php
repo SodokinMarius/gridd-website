@@ -37,6 +37,11 @@ class News extends Model
             });
     }
 
+    public function images()
+    {
+        return $this->hasMany(NewsImage::class)->orderBy('order')->orderBy('id');
+    }
+
     public function getRouteKeyName(): string
     {
         return 'slug';
