@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('title', $project->title.' - GRIDD Consulting et Services')
+@if ($project->description)
+    @section('meta_description', \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($project->description))), 160))
+@endif
+@if ($project->coverImage)
+    @section('og_image', \App\Support\Media::url($project->coverImage->path))
+@endif
 
 @section('content')
 

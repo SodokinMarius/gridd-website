@@ -25,6 +25,10 @@
         </div>
 
         <div class="md:col-span-3">
+            @if (session('contact_error'))
+                <div class="alert-error mb-6">{{ session('contact_error') }}</div>
+            @endif
+
             @if ($errors->any())
                 <div class="alert-error mb-6">
                     <ul class="list-disc list-inside">
@@ -37,6 +41,10 @@
 
             <form method="POST" action="{{ route('contact.store') }}" class="form-stack">
                 @csrf
+                <div class="hidden" aria-hidden="true">
+                    <label for="website">Ne pas remplir</label>
+                    <input id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
                 <div class="form-row">
                     <div class="form-field">
                         <label for="name">Nom complet</label>

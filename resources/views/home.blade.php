@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'GRIDD Consulting et Services - Bureau d\'études Bénin & Afrique de l\'Ouest')
+@section('title', 'GRIDD Consulting et Services - Bureau d\'études Bénin & Afrique')
 
 @section('content')
 
@@ -21,20 +21,27 @@
         <div class="container-content">
             <div class="section-header max-w-2xl reveal">
                 <p class="eyebrow mb-3">Nos services</p>
-                <h2 class="section-title">Deux pôles d'expertise, une même exigence de rigueur.</h2>
+                <h2 class="section-title">Six domaines d'intervention, une même exigence de rigueur.</h2>
             </div>
-            <div class="services-grid">
-                @foreach (config('services_content') as $pole)
-                    <div class="service-card reveal {{ $pole['theme'] === 'green' ? 'service-card-green' : 'service-card-clay' }}">
-                        <h3 class="text-xl font-semibold mb-4 text-white">{{ $pole['pole'] }}</h3>
-                        <ul class="service-list">
-                            @foreach (array_slice($pole['items'], 0, 5) as $item)
+            <div class="home-services-grid">
+                @foreach (config('services_content') as $index => $pole)
+                    <a href="{{ route('services') }}#pole-{{ $index + 1 }}" class="home-service-card reveal {{ $pole['theme'] === 'green' ? 'home-service-card-green' : 'home-service-card-clay' }}">
+                        <div class="home-service-top">
+                            <span class="home-service-number">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                            <span class="home-service-count">{{ count($pole['items']) }} prestations</span>
+                        </div>
+                        <h3 class="home-service-title">{{ $pole['pole'] }}</h3>
+                        <ul class="home-service-list">
+                            @foreach (array_slice($pole['items'], 0, 3) as $item)
                                 <li>{{ $item }}</li>
                             @endforeach
                         </ul>
-                        <a href="{{ route('services') }}" class="service-link">En savoir plus →</a>
-                    </div>
+                        <span class="home-service-link">Découvrir <span aria-hidden="true">→</span></span>
+                    </a>
                 @endforeach
+            </div>
+            <div class="mt-12 flex justify-center reveal">
+                <a href="{{ route('services') }}" class="btn-outline">Voir tous nos services <span aria-hidden="true">↗</span></a>
             </div>
         </div>
     </section>

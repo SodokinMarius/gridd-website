@@ -617,7 +617,7 @@
     }
 
     .services-grid {
-        @apply grid gap-6 md:grid-cols-2;
+        @apply grid gap-6 md:grid-cols-2 lg:grid-cols-3;
     }
 
     .info-card,
@@ -754,6 +754,82 @@
 
     .service-link:hover {
         @apply border-white bg-white text-ink;
+    }
+
+    /* Accueil : aperçu des services (clair, distinct de la page Services) */
+    .home-services-grid {
+        @apply grid gap-5 md:grid-cols-2 lg:grid-cols-3;
+    }
+
+    .home-service-card {
+        --accent: var(--gridd-green);
+        --accent-soft: rgba(46, 157, 48, 0.08);
+        @apply relative flex flex-col overflow-hidden rounded-[1.5rem] border border-ink/[8%] bg-white p-7 transition-all duration-300 md:p-8;
+        box-shadow: var(--gridd-shadow-soft);
+    }
+
+    .home-service-card-clay {
+        --accent: var(--gridd-clay);
+        --accent-soft: rgba(168, 83, 31, 0.08);
+    }
+
+    .home-service-card::before {
+        content: "";
+        @apply absolute inset-x-0 top-0 h-1 origin-left scale-x-[0.18] transition-transform duration-500;
+        background: var(--accent);
+    }
+
+    .home-service-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--accent);
+        background: linear-gradient(180deg, var(--accent-soft), #fff 60%);
+        box-shadow: var(--gridd-shadow);
+    }
+
+    .home-service-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .home-service-top {
+        @apply mb-6 flex items-center justify-between gap-4;
+    }
+
+    .home-service-number {
+        @apply font-display text-4xl font-bold leading-none;
+        color: var(--accent);
+    }
+
+    .home-service-count {
+        @apply rounded-full px-3 py-1 text-xs font-semibold;
+        color: var(--accent);
+        background: var(--accent-soft);
+    }
+
+    .home-service-title {
+        @apply font-display text-xl font-semibold leading-snug text-ink md:text-2xl;
+    }
+
+    .home-service-list {
+        @apply mt-5 flex-1 space-y-2.5 text-sm leading-6 text-ink/[65%];
+    }
+
+    .home-service-list li {
+        @apply relative pl-5;
+    }
+
+    .home-service-list li::before {
+        content: "";
+        @apply absolute left-0 top-[0.6rem] h-1.5 w-1.5 rounded-full;
+        background: var(--accent);
+    }
+
+    .home-service-link {
+        @apply mt-7 inline-flex items-center gap-2 text-sm font-semibold transition-all duration-300;
+        color: var(--accent);
+    }
+
+    .home-service-card:hover .home-service-link {
+        @apply gap-3;
     }
 
     .pole-panel {
@@ -913,42 +989,122 @@
         transform: translateY(-2px);
     }
 
-    .director-block {
-        @apply relative grid gap-8 overflow-hidden rounded-[2rem] border bg-white/[72%] p-6 md:grid-cols-[280px_1fr] md:gap-12 md:p-10;
-        border-color: rgba(255,255,255,0.72);
-        box-shadow: var(--gridd-shadow-soft);
-        backdrop-filter: blur(18px);
+    .director-section {
+        background:
+            radial-gradient(circle at 92% 8%, rgba(46, 157, 48, 0.08), transparent 30rem),
+            radial-gradient(circle at 0% 70%, rgba(168, 83, 31, 0.06), transparent 28rem);
     }
 
-    .director-block::before {
-        content: "\201C";
-        position: absolute;
-        top: -2.4rem;
-        right: 2rem;
-        font-family: "Space Grotesk", sans-serif;
-        font-size: 12rem;
-        line-height: 1;
-        color: rgba(46, 157, 48, 0.08);
-        pointer-events: none;
+    .director-hero {
+        @apply grid items-center gap-10 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16;
     }
 
-    .director-photo {
-        @apply overflow-hidden rounded-[1.5rem] bg-stone-100;
-        aspect-ratio: 3 / 4;
-        box-shadow: 0 18px 45px rgba(16, 32, 26, 0.16);
+    .director-portrait {
+        @apply relative overflow-hidden rounded-[2rem] bg-stone-100;
+        aspect-ratio: 4 / 5;
+        box-shadow: 0 30px 70px rgba(16, 32, 26, 0.18);
     }
 
-    .director-photo img {
-        @apply h-full w-full object-cover;
+    .director-portrait figcaption {
+        @apply absolute inset-x-4 bottom-4 rounded-2xl bg-ink/80 px-5 py-4 text-sm text-paper/70 backdrop-blur-md;
     }
 
-    .director-content {
-        @apply relative z-10;
+    .director-portrait figcaption span {
+        @apply block font-display text-lg font-semibold text-white;
+    }
+
+    .director-title {
+        @apply font-display text-3xl font-bold leading-[1.08] tracking-[-0.04em] text-ink md:text-5xl;
     }
 
     .director-quote {
-        @apply font-display text-xl leading-9 text-ink/[88%] md:text-2xl md:leading-10;
-        letter-spacing: -0.025em;
+        @apply relative mt-10 rounded-[1.75rem] bg-primary-700 p-8 text-white md:p-10;
+        box-shadow: 0 24px 60px rgba(27, 99, 28, 0.25);
+    }
+
+    .director-quote-mark {
+        @apply absolute -top-6 left-8 font-display text-8xl leading-none text-primary-300;
+    }
+
+    .director-quote p {
+        @apply font-display text-xl leading-8 md:text-2xl md:leading-10;
+        letter-spacing: -0.02em;
+    }
+
+    .director-letter {
+        @apply mx-auto mt-20 max-w-4xl md:mt-28;
+    }
+
+    .director-intro {
+        @apply font-display text-2xl leading-snug tracking-[-0.03em] text-ink md:text-3xl md:leading-snug;
+    }
+
+    .director-intro::first-letter {
+        @apply float-left mr-3 mt-1 font-display text-7xl font-bold leading-[0.8] text-primary-600 md:text-8xl;
+    }
+
+    .director-chapter {
+        @apply mt-12 grid gap-4 border-t border-ink/10 pt-10 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-10;
+    }
+
+    .director-chapter-label {
+        @apply flex items-baseline gap-3 font-display text-sm font-bold uppercase tracking-[0.18em] text-clay-500 md:flex-col md:gap-2;
+    }
+
+    .director-chapter-label span {
+        @apply font-display text-4xl font-bold tracking-normal text-primary-600/30 md:text-5xl;
+    }
+
+    .director-chapter-body {
+        @apply space-y-5 text-[1.0625rem] leading-8 text-ink/70;
+    }
+
+    .director-expertises {
+        @apply flex flex-wrap gap-2 py-1;
+    }
+
+    .director-expertises li {
+        @apply rounded-full border border-primary-300/50 bg-primary-50 px-4 py-1.5 text-sm font-semibold text-primary-700;
+    }
+
+    .director-declaration {
+        @apply mt-14 rounded-r-[1.75rem] border-l-4 border-clay-500 bg-clay-50 px-8 py-8 font-display text-xl leading-9 text-ink md:px-10 md:text-2xl md:leading-10;
+        letter-spacing: -0.02em;
+    }
+
+    .director-commitments {
+        @apply relative mt-20 overflow-hidden rounded-[2rem] bg-ink p-8 text-paper md:mt-28 md:p-12;
+        background:
+            radial-gradient(circle at 100% 0%, rgba(46, 157, 48, 0.35), transparent 26rem),
+            #10201A;
+    }
+
+    .director-commitments-title {
+        @apply font-display text-2xl font-bold tracking-[-0.03em] text-white md:text-4xl;
+    }
+
+    .director-commitments ol {
+        @apply mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5;
+    }
+
+    .director-commitments li {
+        @apply flex flex-col gap-6 rounded-2xl border border-white/10 bg-white/5 p-5 font-display text-lg font-semibold leading-snug text-white transition-colors duration-300;
+    }
+
+    .director-commitments li:hover {
+        @apply border-primary-300/60 bg-white/10;
+    }
+
+    .director-commitments li span {
+        @apply text-sm font-bold text-primary-300;
+    }
+
+    .director-signature {
+        @apply mt-10 border-t border-white/10 pt-6 text-sm text-paper/60;
+    }
+
+    .director-signature p:first-child {
+        @apply font-display text-lg font-semibold text-white;
     }
 
     .cta-band {
@@ -1709,7 +1865,7 @@
     }
 
     .services-index-grid {
-        @apply grid gap-4 md:grid-cols-2;
+        @apply grid gap-4 md:grid-cols-2 lg:grid-cols-3;
     }
 
     .services-index-card {
@@ -1750,6 +1906,70 @@
         @apply mt-3 text-sm text-white/60;
     }
 
+    .services-method-header {
+        @apply mb-12 grid items-end gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16;
+    }
+
+    .services-method-lead {
+        @apply border-l-2 border-primary-300/60 pl-6 text-base leading-8 text-ink/65;
+    }
+
+    .services-method-panel {
+        @apply rounded-[2rem] border border-ink/[8%] bg-white/70 p-6 md:p-10;
+        box-shadow: var(--gridd-shadow-soft);
+    }
+
+    .services-method-subtitle {
+        @apply mb-4 font-display text-2xl font-semibold tracking-[-0.03em] text-ink md:text-3xl;
+    }
+
+    .services-method-subtitle span {
+        @apply text-primary-600;
+    }
+
+    .services-method-step {
+        @apply grid gap-2 rounded-2xl border-t border-ink/[8%] px-2 py-6 transition-colors duration-300 md:grid-cols-[5rem_13rem_minmax(0,1fr)] md:items-baseline md:gap-6 md:px-4 md:py-7;
+    }
+
+    .services-method-step:hover {
+        @apply border-transparent bg-primary-50;
+    }
+
+    .services-method-number {
+        @apply font-display text-3xl font-bold leading-none text-primary-600/30 transition-colors duration-300 md:text-4xl;
+    }
+
+    .services-method-step:hover .services-method-number {
+        @apply text-primary-600;
+    }
+
+    .services-method-step h4 {
+        @apply font-display text-xl font-semibold tracking-[-0.02em] text-ink md:text-2xl;
+    }
+
+    .services-method-step p {
+        @apply max-w-2xl text-base leading-7 text-ink/65;
+    }
+
+    .services-method-summary {
+        @apply my-12 rounded-[2rem] p-8 text-paper md:my-16 md:p-12;
+        background:
+            radial-gradient(circle at 100% 0%, rgba(46, 157, 48, 0.35), transparent 26rem),
+            #10201A;
+    }
+
+    .services-method-summary-label {
+        @apply mb-4 font-display text-xs font-bold uppercase tracking-[0.24em] text-primary-300;
+    }
+
+    .services-method-summary-text {
+        @apply max-w-4xl font-display text-2xl leading-snug tracking-[-0.03em] text-white/75 md:text-4xl md:leading-tight;
+    }
+
+    .services-method-summary-text mark {
+        @apply bg-transparent font-semibold text-white underline decoration-primary-500 decoration-4 underline-offset-[6px];
+    }
+
     .services-details-grid {
         @apply grid gap-14 lg:grid-cols-[minmax(15rem,0.7fr)_minmax(0,1.5fr)] lg:gap-20;
     }
@@ -1788,7 +2008,7 @@
     }
 
     .service-detail-content {
-        @apply grid gap-8 p-6 md:grid-cols-[minmax(12rem,0.75fr)_minmax(0,1.25fr)] md:p-9;
+        @apply p-6 md:p-9;
     }
 
     .service-detail-intro {
@@ -1796,7 +2016,7 @@
     }
 
     .service-detail-list {
-        @apply grid gap-2;
+        @apply grid gap-x-8 gap-y-2 md:grid-cols-2;
     }
 
     .service-detail-list li {

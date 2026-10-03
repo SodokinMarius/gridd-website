@@ -21,7 +21,7 @@ class JobPostingSeeder extends Seeder
             [
                 'title' => 'Consultant(e) en maîtrise d\'œuvre',
                 'contract_type' => 'Consultance',
-                'location' => 'Bénin / sous-région',
+                'location' => 'Bénin / Afrique',
                 'description' => "Mission de consultance pour l'accompagnement de projets d'infrastructures, de la conception à la réception des travaux.",
                 'deadline' => now()->addDays(45)->toDateString(),
             ],

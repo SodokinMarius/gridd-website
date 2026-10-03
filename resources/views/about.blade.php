@@ -39,27 +39,78 @@
     </div>
 </section>
 
-<section class="section-block" id="directeur">
+@php($directeur = $institutional['mot_directeur'])
+@php($nomDirecteur = trim(($directeur['civilite'] ?? '').' '.$directeur['prenom'].' '.$directeur['nom']))
+<section class="director-section section-block" id="directeur">
     <div class="container-content">
-        <p class="eyebrow mb-3">Mot du Directeur</p>
-        <div class="director-block">
-            <div class="director-photo">
+        <div class="director-hero">
+            <figure class="director-portrait reveal">
                 <x-responsive-image
-                    :src="$institutional['mot_directeur']['photo']"
-                    :alt="$institutional['mot_directeur']['prenom'].' '.$institutional['mot_directeur']['nom']"
-                    class="w-full h-full object-cover"
+                    :src="$directeur['photo']"
+                    :alt="$nomDirecteur.', '.$directeur['poste']"
+                    class="h-full w-full object-cover"
                 />
-            </div>
-            <div class="director-content">
+                <figcaption>
+                    <span>{{ $nomDirecteur }}</span>
+                    {{ $directeur['poste'] }}, GRIDD Consulting &amp; Services
+                </figcaption>
+            </figure>
+            <div class="director-hero-content reveal reveal-delay-1">
+                <p class="eyebrow mb-4">Message du Directeur Général</p>
+                <h2 class="director-title">{{ $directeur['titre'] }}</h2>
                 <blockquote class="director-quote">
-                    « {{ $institutional['mot_directeur']['message'] }} »
+                    <span class="director-quote-mark" aria-hidden="true">“</span>
+                    <p>{{ $directeur['citation'] }}</p>
                 </blockquote>
-                <div class="mt-6">
-                    <p class="font-display font-semibold text-lg">
-                        {{ $institutional['mot_directeur']['prenom'] }} {{ $institutional['mot_directeur']['nom'] }}
+            </div>
+        </div>
+
+        <div class="director-letter">
+            <p class="director-intro reveal">{{ $directeur['introduction'] }}</p>
+
+            @foreach ($directeur['chapitres'] as $index => $chapitre)
+                <div class="director-chapter reveal">
+                    <p class="director-chapter-label">
+                        <span>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        {{ $chapitre['label'] }}
                     </p>
-                    <p class="text-primary-600 text-sm mt-1">{{ $institutional['mot_directeur']['poste'] }}</p>
+                    <div class="director-chapter-body">
+                        @foreach ($chapitre['paragraphes'] as $paragraphe)
+                            <p>{{ $paragraphe }}</p>
+                        @endforeach
+                        @isset($chapitre['expertises'])
+                            <ul class="director-expertises">
+                                @foreach ($chapitre['expertises'] as $expertise)
+                                    <li>{{ $expertise }}</li>
+                                @endforeach
+                            </ul>
+                        @endisset
+                        @isset($chapitre['conclusion'])
+                            <p>{{ $chapitre['conclusion'] }}</p>
+                        @endisset
+                    </div>
                 </div>
+            @endforeach
+
+            <p class="director-declaration reveal">{{ $directeur['declaration'] }}</p>
+        </div>
+
+        <div class="director-commitments reveal">
+            <p class="director-commitments-title">Notre engagement est simple</p>
+            <ol>
+                @foreach ($directeur['engagements'] as $index => $engagement)
+                    <li>
+                        <span>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        {{ $engagement }}
+                    </li>
+                @endforeach
+            </ol>
+            <div class="director-signature">
+                <p>{{ $nomDirecteur }}</p>
+                <p>{{ $directeur['poste'] }}, GRIDD Consulting &amp; Services</p>
+                @if (! empty($directeur['linkedin']))
+                    <a href="{{ $directeur['linkedin'] }}" target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary-300 hover:text-white">LinkedIn <span aria-hidden="true">↗</span></a>
+                @endif
             </div>
         </div>
     </div>

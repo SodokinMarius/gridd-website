@@ -46,7 +46,7 @@ Route::get('/offres-emploi/{job:slug}/postuler', [JobApplicationController::clas
 Route::post('/offres-emploi/{job:slug}/postuler', [JobApplicationController::class, 'store'])->name('jobs.apply.store');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
 
 /*
 |--------------------------------------------------------------------------

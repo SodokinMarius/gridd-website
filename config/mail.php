@@ -107,6 +107,12 @@ return [
     |
     */
 
+    /*
+    | Adresse qui reçoit les messages du formulaire de contact du site.
+    */
+
+    'contact_recipient' => env('MAIL_CONTACT_RECIPIENT', env('MAIL_FROM_ADDRESS', 'contact@gridd-cs.com')),
+
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),

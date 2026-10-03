@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessageMail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
+use Throwable;
 
 class ContactController extends Controller
 {
@@ -16,6 +18,11 @@ class ContactController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        // Champ piège invisible : les robots le remplissent, pas les humains.
+        if (filled($request->input('website'))) {
+            return back()->with('status', 'Votre message a bien été envoyé. Nous vous répondrons dans les meilleurs délais.');
+        }
+
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
@@ -24,22 +31,15 @@ class ContactController extends Controller
             'message' => ['required', 'string', 'max:5000'],
         ]);
 
-        // Envoi de l'email vers l'adresse professionnelle de GRIDD.
-        // Créez resources/views/emails/contact.blade.php et un Mailable ContactMessageMail
-        // si vous souhaitez un template plus riche. Ici on utilise Mail::raw pour rester simple.
-        Mail::raw(
-            "Nouveau message de contact\n\n"
-            ."Nom : {$data['name']}\n"
-            ."Email : {$data['email']}\n"
-            ."Téléphone : ".($data['phone'] ?? '-')."\n"
-            ."Sujet : {$data['subject']}\n\n"
-            ."Message :\n{$data['message']}",
-            function ($message) use ($data) {
-                $message->to(config('mail.from.address'))
-                    ->subject('Nouveau message de contact — '.$data['subject'])
-                    ->replyTo($data['email'], $data['name']);
-            }
-        );
+        try {
+            Mail::to(config('mail.contact_recipient'))->send(new ContactMessageMail($data));
+        } catch (Throwable $e) {
+            report($e);
+
+            return back()
+                ->withInput()
+                ->with('contact_error', "Votre message n'a pas pu être envoyé pour le moment. Veuillez réessayer plus tard ou nous écrire directement à contact@gridd-cs.com.");
+        }
 
         return back()->with('status', 'Votre message a bien été envoyé. Nous vous répondrons dans les meilleurs délais.');
     }

@@ -17,7 +17,7 @@ class HeroSlideSeeder extends Seeder
 
         $slides = [
             [
-                'eyebrow' => "Bureau d'études - Bénin & Afrique de l'Ouest",
+                'eyebrow' => "Bureau d'études - Bénin & toute l'Afrique",
                 'title' => "Nous mesurons le terrain pour construire l'avenir durable.",
                 'subtitle' => 'GRIDD Consulting et Services accompagne institutions, entreprises et collectivités dans leurs évaluations environnementales et sociales.',
                 'button_text' => 'Découvrir nos services',
@@ -33,7 +33,7 @@ class HeroSlideSeeder extends Seeder
                 'order' => 2,
             ],
             [
-                'eyebrow' => 'Afrique de l\'Ouest',
+                'eyebrow' => 'Partout en Afrique',
                 'title' => "Un partenaire de confiance pour vos projets d'infrastructure.",
                 'subtitle' => 'Plus de 40 projets réalisés dans 5 pays, avec une équipe de 20 experts mobilisables.',
                 'button_text' => 'Nous contacter',

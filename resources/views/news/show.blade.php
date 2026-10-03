@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('title', $news->title.' - GRIDD Consulting et Services')
+@section('meta_description', \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($news->content))), 160))
+@section('og_type', 'article')
+@if ($news->cover_image)
+    @section('og_image', \App\Support\Media::url($news->cover_image))
+@endif
 
 @section('content')
 <section class="page-hero">

@@ -16,7 +16,7 @@
                     <div class="hero-slide-text">
                         <div class="hero-chip">
                             <span></span>
-                            Bénin & Afrique de l’Ouest
+                            Bénin & toute l’Afrique
                         </div>
 
                         @if ($slide->eyebrow)
@@ -98,7 +98,7 @@
             <div class="hero-slide-text">
                 <div class="hero-chip">
                     <span></span>
-                    Bureau d’études - Bénin & Afrique de l’Ouest
+                    Bureau d’études - Bénin & toute l’Afrique
                 </div>
 
                 <h1 class="hero-slide-title">Nous mesurons le terrain pour construire l’avenir durable.</h1>

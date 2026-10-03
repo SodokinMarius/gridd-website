@@ -64,3 +64,12 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+#sudo systemctl stop apache2
+#sudo /opt/lampp/lampp restart
+
+Sure, please keep this reference ID: NC-DYP-
+
+composer install --no-dev --optimize-autoloader
+npm run build        # seulement si tu utilises Vite/Mix
