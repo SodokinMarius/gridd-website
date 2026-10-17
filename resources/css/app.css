@@ -1565,8 +1565,31 @@
     }
 
     .admin-sidebar {
-        @apply border-r border-white/10 bg-ink;
+        @apply fixed inset-y-0 left-0 z-50 flex -translate-x-full border-r border-white/10 bg-ink transition-transform duration-300 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0;
         box-shadow: 18px 0 50px rgba(16, 32, 26, 0.08);
+    }
+
+    /* Menu coulissant ouvert (mobile / tablette) */
+    .admin-sidebar.is-open {
+        @apply translate-x-0;
+    }
+
+    .admin-sidebar-backdrop {
+        @apply fixed inset-0 z-40 bg-ink/50 lg:hidden;
+        backdrop-filter: blur(2px);
+    }
+
+    .admin-menu-button {
+        @apply flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-ink/10 bg-white text-ink transition-colors hover:border-primary-500 hover:text-primary-700;
+    }
+
+    .admin-menu-close {
+        @apply flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl text-paper/60 transition-colors hover:bg-white/10 hover:text-paper;
+    }
+
+    .admin-menu-button svg,
+    .admin-menu-close svg {
+        @apply h-5 w-5;
     }
 
     .admin-main-header {
@@ -2312,5 +2335,76 @@
 
     .password-toggle svg {
         @apply h-5 w-5;
+    }
+}
+
+
+/* Tableaux d'administration : sur mobile, chaque ligne devient une carte.
+   Les libellés (data-label) sont recopiés depuis l'en-tête par app.js. */
+@media (max-width: 767.98px) {
+    .admin-table thead {
+        display: none;
+    }
+
+    .admin-table,
+    .admin-table tbody,
+    .admin-table tr,
+    .admin-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-table tr {
+        padding: 0.9rem 1rem;
+    }
+
+    .admin-table td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.3rem 0 !important;
+        text-align: right;
+    }
+
+    .admin-table td::before {
+        content: attr(data-label);
+        flex-shrink: 0;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-align: left;
+        text-transform: uppercase;
+        color: rgba(16, 32, 26, 0.45);
+    }
+
+    /* Première colonne : titre de la carte */
+    .admin-table td:first-child {
+        display: block;
+        padding-bottom: 0.5rem !important;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .admin-table td:first-child::before,
+    .admin-table td[data-label=""]::before,
+    .admin-table td[colspan]::before {
+        display: none;
+    }
+
+    .admin-table td[colspan] {
+        display: block;
+        text-align: center;
+    }
+
+    /* Dernière colonne : actions */
+    .admin-table td:last-child:not([colspan]) {
+        margin-top: 0.5rem;
+        padding-top: 0.75rem !important;
+        border-top: 1px dashed rgba(16, 32, 26, 0.1);
+    }
+
+    .admin-table .admin-row-actions {
+        width: 100%;
     }
 }

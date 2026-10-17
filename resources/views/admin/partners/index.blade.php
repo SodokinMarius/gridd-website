@@ -14,7 +14,7 @@
 
 <div class="admin-panel overflow-hidden p-0">
     <div class="overflow-x-auto">
-        <table class="w-full min-w-[700px] text-sm">
+        <table class="admin-table w-full text-sm md:min-w-[700px]">
             <thead class="bg-stone-50 text-left text-xs font-bold uppercase tracking-[0.12em] text-ink/45">
                 <tr>
                     <th class="px-5 py-4">Partenaire</th>

@@ -10,7 +10,7 @@
 </div>
 
 <div class="bg-white border border-stone-200 rounded-sm overflow-hidden">
-    <table class="w-full text-sm">
+    <table class="admin-table w-full text-sm">
         <thead class="bg-stone-50 text-left text-stone-600">
             <tr>
                 <th class="px-4 py-3">Nom</th>
@@ -25,10 +25,12 @@
                     <td class="px-4 py-3">{{ $user->name }}</td>
                     <td class="px-4 py-3">{{ $user->email }}</td>
                     <td class="px-4 py-3">
-                        {{ $user->isAdmin() ? 'Administrateur' : 'Éditeur' }}
-                        @if ($user->must_change_password)
-                            <span class="admin-status admin-status-warning ml-2" title="Le mot de passe provisoire n’a pas encore été remplacé">Mot de passe provisoire</span>
-                        @endif
+                        <span class="inline-flex flex-wrap items-center justify-end gap-2">
+                            {{ $user->isAdmin() ? 'Administrateur' : 'Éditeur' }}
+                            @if ($user->must_change_password)
+                                <span class="admin-status admin-status-warning" title="Le mot de passe provisoire n’a pas encore été remplacé">Mot de passe provisoire</span>
+                            @endif
+                        </span>
                     </td>
                     <td class="px-4 py-3">
                         <div class="admin-row-actions">

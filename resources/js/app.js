@@ -320,6 +320,60 @@ function initPasswordToggles() {
     });
 }
 
+/**
+ * Administration : menu latéral coulissant sur mobile / tablette.
+ */
+function initAdminMenu() {
+    const sidebar = document.querySelector('[data-admin-menu]');
+    const openButton = document.querySelector('[data-admin-menu-open]');
+    if (!sidebar || !openButton) return;
+
+    const backdrop = document.querySelector('.admin-sidebar-backdrop');
+
+    const setOpen = (open) => {
+        sidebar.classList.toggle('is-open', open);
+        if (backdrop) backdrop.hidden = !open;
+        openButton.setAttribute('aria-expanded', String(open));
+        document.body.style.overflow = open ? 'hidden' : '';
+        if (open) sidebar.querySelector('[data-admin-menu-close]')?.focus();
+    };
+
+    openButton.addEventListener('click', () => setOpen(true));
+    document.querySelectorAll('[data-admin-menu-close]').forEach((el) => {
+        el.addEventListener('click', () => {
+            setOpen(false);
+            openButton.focus();
+        });
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && sidebar.classList.contains('is-open')) {
+            setOpen(false);
+            openButton.focus();
+        }
+    });
+
+    // Passage en grand écran : on remet l'état par défaut.
+    window.matchMedia('(min-width: 1024px)').addEventListener('change', (event) => {
+        if (event.matches) setOpen(false);
+    });
+}
+
+/**
+ * Administration : recopie le titre de chaque colonne dans les cellules (data-label),
+ * utilisé par l'affichage en cartes des tableaux sur mobile.
+ */
+function initAdminTables() {
+    document.querySelectorAll('table.admin-table').forEach((table) => {
+        const labels = [...table.querySelectorAll('thead th')].map((th) => th.textContent.trim());
+        table.querySelectorAll('tbody tr').forEach((row) => {
+            [...row.children].forEach((cell, index) => {
+                if (!cell.hasAttribute('colspan')) cell.dataset.label = labels[index] ?? '';
+            });
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initHeroCarousel();
     initScrollReveal();
@@ -328,4 +382,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initDesktopSubmenus();
     initConfirmDialogs();
     initPasswordToggles();
+    initAdminMenu();
+    initAdminTables();
 });

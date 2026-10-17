@@ -26,8 +26,11 @@
 <body class="admin-shell text-ink font-body">
 <div class="flex min-h-screen">
 
-    <aside class="admin-sidebar hidden w-72 flex-shrink-0 flex-col text-paper/80 lg:flex">
-        <div class="border-b border-paper/10 px-6 py-7">
+    {{-- Sur mobile/tablette : menu coulissant ouvert par le bouton du header --}}
+    <div class="admin-sidebar-backdrop" data-admin-menu-close hidden></div>
+
+    <aside id="admin-sidebar" class="admin-sidebar w-72 flex-shrink-0 flex-col text-paper/80" data-admin-menu>
+        <div class="flex items-center justify-between gap-3 border-b border-paper/10 px-6 py-7">
             <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3" aria-label="Tableau de bord GRIDD">
                 <span class="flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-lg">
                     <img src="{{ asset('images/logo.png') }}" alt="GRIDD" class="h-8 w-auto object-contain">
@@ -37,6 +40,9 @@
                     <span class="mt-1 block text-[0.65rem] font-bold uppercase tracking-[0.18em] text-paper/45">Administration</span>
                 </span>
             </a>
+            <button type="button" class="admin-menu-close lg:hidden" data-admin-menu-close aria-label="Fermer le menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            </button>
         </div>
 
         <nav class="flex-1 overflow-y-auto px-4 py-6 text-sm" aria-label="Navigation d’administration">
@@ -94,12 +100,17 @@
     <div class="flex min-w-0 flex-1 flex-col">
         <header class="admin-main-header px-5 py-4 md:px-8">
             <div class="flex items-center justify-between gap-5">
-                <div>
-                    <p class="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-primary-700">Espace sécurisé</p>
-                    <h1 class="font-display text-xl font-bold tracking-[-0.04em] md:text-2xl">@yield('title', 'Tableau de bord')</h1>
+                <div class="flex min-w-0 items-center gap-3">
+                    <button type="button" class="admin-menu-button lg:hidden" data-admin-menu-open aria-controls="admin-sidebar" aria-expanded="false" aria-label="Ouvrir le menu">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                    </button>
+                    <div class="min-w-0">
+                        <p class="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-primary-700">Espace sécurisé</p>
+                        <h1 class="truncate font-display text-xl font-bold tracking-[-0.04em] md:text-2xl">@yield('title', 'Tableau de bord')</h1>
+                    </div>
                 </div>
-                <div class="hidden items-center gap-3 sm:flex">
-                    <span class="rounded-full border border-primary-300/40 bg-primary-50 px-3 py-1.5 text-xs font-bold text-primary-700">{{ auth()->user()?->isAdmin() ? 'ADMIN' : 'ÉDITEUR' }}</span>
+                <div class="flex flex-shrink-0 items-center gap-3">
+                    <span class="hidden rounded-full sm:inline-block border border-primary-300/40 bg-primary-50 px-3 py-1.5 text-xs font-bold text-primary-700">{{ auth()->user()?->isAdmin() ? 'ADMIN' : 'ÉDITEUR' }}</span>
                     <a href="{{ route('admin.password.edit') }}" class="flex h-10 w-10 items-center justify-center rounded-full bg-ink font-display font-bold text-paper transition-colors hover:bg-primary-700" title="Mon mot de passe" aria-label="Mon mot de passe">
                         {{ mb_strtoupper(mb_substr(auth()->user()?->name ?? 'G', 0, 1)) }}
                     </a>

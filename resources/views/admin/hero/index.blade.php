@@ -10,7 +10,7 @@
 </div>
 
 <div class="bg-white border border-stone-200 rounded-sm overflow-hidden">
-    <table class="w-full text-sm">
+    <table class="admin-table w-full text-sm">
         <thead class="bg-stone-50 text-left text-stone-600">
             <tr>
                 <th class="px-4 py-3">Aperçu</th>
