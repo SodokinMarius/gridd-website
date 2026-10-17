@@ -26,9 +26,10 @@
         <div class="w-full md:w-[calc(25%-30px)]">
             <p class="font-display text-paper mb-3 text-sm">Contact</p>
             <ul class="space-y-2 text-sm">
-                <li>Abomey-Calavi, Bénin</li>
+                <li>Tankpè, Abomey-Calavi, Bénin</li>
                 <li>contact@gridd-cs.com</li>
-                <li>+229 01 96 42 53 83</li>
+                <li><a href="tel:+2290196425383" class="hover:text-paper transition-colors">+229 01 96 42 53 83</a></li>
+                <li><a href="tel:+2290195009445" class="hover:text-paper transition-colors">+229 01 95 00 94 45</a></li>
             </ul>
         </div>
         <div class="w-full md:w-[calc(25%-30px)]">

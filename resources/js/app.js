@@ -1,6 +1,6 @@
 /**
  * GRIDD — interactions front
- * Carrousel hero, menu mobile, animations au scroll, header sticky.
+ * Carrousel hero, menu mobile, animations au scroll, header sticky, confirmations admin.
  */
 
 function initHeroCarousel() {
@@ -229,10 +229,60 @@ function initDesktopSubmenus() {
     });
 }
 
+/**
+ * Confirmation des formulaires [data-confirm] dans une fenêtre modale
+ * (remplace la boîte native window.confirm).
+ */
+function initConfirmDialogs() {
+    const dialog = document.getElementById('confirm-dialog');
+    if (!dialog || typeof dialog.showModal !== 'function') return;
+
+    const message = dialog.querySelector('#confirm-dialog-message');
+    const okButton = dialog.querySelector('[data-confirm-ok]');
+    let pendingForm = null;
+
+    document.addEventListener('submit', (event) => {
+        const form = event.target;
+        if (!(form instanceof HTMLFormElement) || !form.dataset.confirm) return;
+
+        event.preventDefault();
+        pendingForm = form;
+        message.textContent = form.dataset.confirm;
+        dialog.showModal();
+        dialog.querySelector('[data-confirm-cancel]').focus();
+    });
+
+    okButton.addEventListener('click', () => {
+        const form = pendingForm;
+        pendingForm = null;
+        okButton.disabled = true;
+        dialog.close();
+        // submit() ne redéclenche pas l'événement submit : pas de nouvelle confirmation.
+        form?.submit();
+    });
+
+    dialog.querySelector('[data-confirm-cancel]').addEventListener('click', () => dialog.close());
+
+    // Clic sur le fond assombri : fermeture.
+    dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener('close', () => {
+        pendingForm = null;
+    });
+
+    // Retour arrière du navigateur (bfcache) : le bouton redevient utilisable.
+    window.addEventListener('pageshow', () => {
+        okButton.disabled = false;
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initHeroCarousel();
     initScrollReveal();
     initHeaderScroll();
     initMobileMenu();
     initDesktopSubmenus();
+    initConfirmDialogs();
 });

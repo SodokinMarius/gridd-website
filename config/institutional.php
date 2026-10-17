@@ -12,6 +12,66 @@ return [
         ."des évaluations environnementales et sociales. Grâce à une expertise multidisciplinaire, GRIDD apporte "
         ."des solutions adaptées aux enjeux du développement durable, au Bénin et dans toute l'Afrique.",
 
+    // Missions illustrant l'historique (page À propos). Photos dans public/images/historique/.
+    'missions' => [
+        [
+            'type' => 'Audit environnemental',
+            'titre' => 'Audit de démantèlement — Sinohydro Corporation Limited',
+            // Catégorie de la galerie qui regroupe toutes les photos de la mission.
+            'galerie' => 'Audit Sinohydro',
+            'lieu' => 'Bénin',
+            'description' => "Inspection des installations de chantier, de la centrale d'enrobage et des zones de "
+                ."stockage, et échanges avec l'équipe HSE de l'entreprise.",
+            'photos' => [
+                ['src' => 'images/historique/sinohydro-site.jpg', 'alt' => "Experts GRIDD en inspection sur le site de concassage"],
+                ['src' => 'images/historique/sinohydro-reunion.jpg', 'alt' => "Réunion de cadrage de l'audit avec l'équipe du chantier"],
+                ['src' => 'images/historique/sinohydro-centrale.jpg', 'alt' => "Centrale d'enrobage inspectée lors de l'audit"],
+            ],
+        ],
+        [
+            'type' => 'Consultations & terrain',
+            'titre' => 'PRODEFILAV',
+            // Catégorie de la galerie qui regroupe toutes les photos de la mission.
+            'galerie' => 'PRODEFILAV Zagnanado',
+            'lieu' => 'Zagnanado',
+            'description' => "Consultations publiques avec les communautés et relevés de terrain sur les parcelles "
+                ."concernées par le projet.",
+            'photos' => [
+                ['src' => 'images/historique/prodefilav-consultation.jpg', 'alt' => 'Consultation publique avec les communautés à Zagnanado'],
+                ['src' => 'images/historique/prodefilav-terrain.jpg', 'alt' => "L'équipe GRIDD en visite de terrain à Zagnanado"],
+                ['src' => 'images/historique/prodefilav-releves.jpg', 'alt' => 'Relevés de terrain dans les parcelles agricoles'],
+            ],
+        ],
+        [
+            'type' => 'EIES',
+            'titre' => 'EIES CIESN',
+            // Catégorie de la galerie qui regroupe toutes les photos de la mission.
+            'galerie' => 'EIES CIESN Dassa-Savalou',
+            'lieu' => 'Dassa & Savalou',
+            'description' => "Consultations des populations, enquêtes socio-économiques auprès des ménages et "
+                ."rencontres avec les autorités locales.",
+            'photos' => [
+                ['src' => 'images/historique/ciesn-consultation.jpg', 'alt' => 'Consultation des populations à Dassa'],
+                ['src' => 'images/historique/ciesn-enquete.jpg', 'alt' => 'Enquête socio-économique auprès des riverains'],
+                ['src' => 'images/historique/ciesn-institutions.jpg', 'alt' => 'Rencontre avec les autorités locales'],
+            ],
+        ],
+        [
+            'type' => 'EIES',
+            'titre' => 'EIES Abomey',
+            // Catégorie de la galerie qui regroupe toutes les photos de la mission.
+            'galerie' => 'EIES Abomey',
+            'lieu' => 'Abomey',
+            'description' => "Atelier avec les parties prenantes institutionnelles, visite des sites et "
+                ."consultations des usagers.",
+            'photos' => [
+                ['src' => 'images/historique/abomey-equipe.jpg', 'alt' => "Parties prenantes et équipe GRIDD lors de la visite de site à Abomey"],
+                ['src' => 'images/historique/abomey-atelier.jpg', 'alt' => 'Atelier de travail avec les parties prenantes'],
+                ['src' => 'images/historique/abomey-consultation.jpg', 'alt' => 'Consultation des usagers à Abomey'],
+            ],
+        ],
+    ],
+
     'approche' => "L'approche organisationnelle de GRIDD Consulting et Services est basée sur la responsabilité "
         ."du personnel, la décentralisation des activités et la concertation sur les modalités de mise en œuvre "
         ."de la vision, des politiques et orientations définies par le bureau d'études.",

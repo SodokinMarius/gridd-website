@@ -24,11 +24,15 @@
         <meta property="og:image" content="@yield('og_image')">
         <meta name="twitter:image" content="@yield('og_image')">
     @else
-        {{-- Capture de la page d'accueil (1200×630) --}}
-        <meta property="og:image" content="{{ asset('images/og-image.jpg') }}">
+        {{-- Capture de la page d'accueil (1200×630), versionnée pour invalider les caches --}}
+        @php
+            $ogImagePath = public_path('images/og-image.jpg');
+            $ogImage = asset('images/og-image.jpg').(is_file($ogImagePath) ? '?v='.filemtime($ogImagePath) : '');
+        @endphp
+        <meta property="og:image" content="{{ $ogImage }}">
         <meta property="og:image:width" content="1200">
         <meta property="og:image:height" content="630">
-        <meta name="twitter:image" content="{{ asset('images/og-image.jpg') }}">
+        <meta name="twitter:image" content="{{ $ogImage }}">
     @endif
     <meta property="og:image:alt" content="@yield('title', 'GRIDD Consulting et Services')">
     <meta name="twitter:card" content="summary_large_image">

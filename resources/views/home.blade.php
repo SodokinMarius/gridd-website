@@ -101,27 +101,22 @@
             <div class="partners-grid">
                 @foreach ($partners as $partner)
                     @php $partnerUrl = $partner->url ?: null; @endphp
-                    @if ($partnerUrl)
-                    <a href="{{ $partnerUrl }}" target="_blank" rel="noopener noreferrer" class="partner-card reveal" aria-label="Visiter le site de {{ $partner->name }}">
-                    @else
-                    <div class="partner-card reveal">
-                    @endif
+                    <{{ $partnerUrl ? 'a' : 'div' }}
+                        @if ($partnerUrl) href="{{ $partnerUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Visiter le site de {{ $partner->name }}" @endif
+                        class="partner-card reveal">
                         <div class="partner-logo">
                             @if ($partner->logo)
-                                <x-responsive-image :src="$partner->logo" :alt="$partner->name" class="h-full w-full object-contain" />
+                                <x-responsive-image :src="$partner->logo" :alt="$partner->name" />
                             @else
                                 <span>{{ mb_strtoupper(mb_substr($partner->name, 0, 1)) }}</span>
                             @endif
-                        </div>
-                        <div class="flex min-w-0 items-center justify-between gap-3">
-                            <p class="truncate font-display text-sm font-semibold text-ink/75">{{ $partner->name }}</p>
                             @if ($partnerUrl)<span class="partner-arrow" aria-hidden="true">↗</span>@endif
                         </div>
-                    @if ($partnerUrl)
-                    </a>
-                    @else
-                    </div>
-                    @endif
+                        <div class="partner-meta">
+                            <p class="partner-name">{{ $partner->name }}</p>
+                            <x-partner-country :partner="$partner" />
+                        </div>
+                    </{{ $partnerUrl ? 'a' : 'div' }}>
                 @endforeach
             </div>
         </div>

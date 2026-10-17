@@ -35,12 +35,11 @@
                             Active
                         @endif
                     </td>
-                    <td class="px-4 py-3 text-right space-x-3">
-                        <a href="{{ route('admin.jobs.edit', $job) }}" class="text-primary-600 hover:underline">Modifier</a>
-                        <form method="POST" action="{{ route('admin.jobs.destroy', $job) }}" class="inline" onsubmit="return confirm('Supprimer cette offre ?');">
-                            @csrf @method('DELETE')
-                            <button class="text-clay-500 hover:underline">Supprimer</button>
-                        </form>
+                    <td class="px-4 py-3">
+                        <div class="admin-row-actions">
+                            <x-admin.edit-link :href="route('admin.jobs.edit', $job)" />
+                            <x-admin.delete-button :action="route('admin.jobs.destroy', $job)" message="Supprimer l’offre « {{ $job->title }} » ?" />
+                        </div>
                     </td>
                 </tr>
             @empty

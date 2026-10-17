@@ -27,12 +27,11 @@
                     <td class="px-4 py-3">{{ $testimonial->position }}</td>
                     <td class="px-4 py-3">{{ $testimonial->order }}</td>
                     <td class="px-4 py-3">{{ $testimonial->is_published ? 'Publié' : 'Masqué' }}</td>
-                    <td class="px-4 py-3 text-right space-x-3">
-                        <a href="{{ route('admin.testimonials.edit', $testimonial) }}" class="text-primary-600 hover:underline">Modifier</a>
-                        <form method="POST" action="{{ route('admin.testimonials.destroy', $testimonial) }}" class="inline" onsubmit="return confirm('Supprimer ce témoignage ?');">
-                            @csrf @method('DELETE')
-                            <button class="text-clay-500 hover:underline">Supprimer</button>
-                        </form>
+                    <td class="px-4 py-3">
+                        <div class="admin-row-actions">
+                            <x-admin.edit-link :href="route('admin.testimonials.edit', $testimonial)" />
+                            <x-admin.delete-button :action="route('admin.testimonials.destroy', $testimonial)" message="Supprimer le témoignage de {{ $testimonial->first_name }} {{ $testimonial->last_name }} ?" />
+                        </div>
                     </td>
                 </tr>
             @empty

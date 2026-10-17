@@ -16,11 +16,10 @@
                 <img src="{{ asset('storage/'.$image->path) }}" class="w-full h-full object-cover">
             </div>
             <div class="p-3">
-                <p class="text-xs text-stone-500 mb-2 capitalize">{{ $image->category ?? 'Non classée' }}</p>
-                <form method="POST" action="{{ route('admin.gallery.destroy', $image) }}" onsubmit="return confirm('Supprimer cette photo ?');">
-                    @csrf @method('DELETE')
-                    <button class="text-clay-500 text-xs hover:underline">Supprimer</button>
-                </form>
+                <div class="flex items-center justify-between gap-2">
+                    <p class="truncate text-xs text-stone-500">{{ $image->category ?? 'Non classée' }}</p>
+                    <x-admin.delete-button :action="route('admin.gallery.destroy', $image)" message="Supprimer cette photo de la galerie ?" />
+                </div>
             </div>
         </div>
     @empty

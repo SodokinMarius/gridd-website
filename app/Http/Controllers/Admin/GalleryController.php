@@ -23,7 +23,12 @@ class GalleryController extends Controller
     {
         $projects = Project::orderBy('title')->get();
 
-        return view('admin.gallery.create', compact('projects'));
+        // Catégories déjà utilisées + celles reliées aux missions de la page À propos.
+        $categories = GalleryImage::query()->distinct()->pluck('category')
+            ->merge(collect(config('institutional.missions', []))->pluck('galerie'))
+            ->filter()->unique()->sort()->values();
+
+        return view('admin.gallery.create', compact('projects', 'categories'));
     }
 
     public function store(Request $request): RedirectResponse

@@ -18,6 +18,7 @@
             <thead class="bg-stone-50 text-left text-xs font-bold uppercase tracking-[0.12em] text-ink/45">
                 <tr>
                     <th class="px-5 py-4">Partenaire</th>
+                    <th class="px-5 py-4">Pays</th>
                     <th class="px-5 py-4">Lien</th>
                     <th class="px-5 py-4">Ordre</th>
                     <th class="px-5 py-4">Statut</th>
@@ -39,6 +40,9 @@
                                 <span class="font-semibold text-ink/80">{{ $partner->name }}</span>
                             </div>
                         </td>
+                        <td class="px-5 py-4 text-ink/65">
+                            <x-partner-country :partner="$partner" fallback="Non renseigné" />
+                        </td>
                         <td class="px-5 py-4 text-ink/55">
                             @if ($partner->url)
                                 <a href="{{ $partner->url }}" target="_blank" rel="noopener" class="max-w-xs truncate text-primary-700 hover:underline">{{ $partner->url }}</a>
@@ -52,17 +56,16 @@
                                 {{ $partner->is_published ? 'Publié' : 'Masqué' }}
                             </span>
                         </td>
-                        <td class="space-x-3 px-5 py-4 text-right">
-                            <a href="{{ route('admin.partners.edit', $partner) }}" class="font-semibold text-primary-700 hover:underline">Modifier</a>
-                            <form method="POST" action="{{ route('admin.partners.destroy', $partner) }}" class="inline" onsubmit="return confirm('Supprimer ce partenaire ?');">
-                                @csrf @method('DELETE')
-                                <button class="font-semibold text-clay-600 hover:underline">Supprimer</button>
-                            </form>
+                        <td class="px-5 py-4">
+                            <div class="admin-row-actions">
+                                <x-admin.edit-link :href="route('admin.partners.edit', $partner)" />
+                                <x-admin.delete-button :action="route('admin.partners.destroy', $partner)" message="Supprimer le partenaire « {{ $partner->name }} » ?" />
+                            </div>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="px-5 py-12 text-center text-sm text-ink/50">Aucun partenaire pour le moment.</td>
+                        <td colspan="6" class="px-5 py-12 text-center text-sm text-ink/50">Aucun partenaire pour le moment.</td>
                     </tr>
                 @endforelse
             </tbody>

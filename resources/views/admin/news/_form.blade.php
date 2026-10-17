@@ -38,10 +38,8 @@
             @foreach ($news->images as $image)
                 <div class="group relative overflow-hidden rounded-xl bg-white">
                     <img src="{{ \App\Support\Media::url($image->path) }}" alt="{{ $image->caption ?: 'Image de '.$news->title }}" class="aspect-square w-full object-cover">
-                    <form method="POST" action="{{ route('admin.news.images.destroy', $image) }}" class="absolute inset-x-2 bottom-2 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100" onsubmit="return confirm('Supprimer cette image ?');">
-                        @csrf @method('DELETE')
-                        <button class="w-full rounded-lg bg-ink/90 px-2 py-2 text-xs font-bold text-paper">Supprimer</button>
-                    </form>
+                    <x-admin.delete-button :action="route('admin.news.images.destroy', $image)" message="Supprimer cette image de l’actualité ?"
+                        class="admin-icon-btn-overlay absolute right-2 top-2" />
                 </div>
             @endforeach
         </div>

@@ -1,6 +1,6 @@
 @php
     $contentLinks = [
-        ['label' => 'Bannière accueil', 'route' => 'admin.hero.index', 'pattern' => 'admin.hero.*'],
+        ['label' => 'Bannière accueil', 'route' => 'admin.hero.index', 'pattern' => 'admin.hero.*', 'admin_only' => true],
         ['label' => 'Réalisations', 'route' => 'admin.projects.index', 'pattern' => 'admin.projects.*'],
         ['label' => 'Partenaires', 'route' => 'admin.partners.index', 'pattern' => 'admin.partners.*'],
         ['label' => 'Galerie', 'route' => 'admin.gallery.index', 'pattern' => 'admin.gallery.*'],
@@ -49,7 +49,7 @@
             <p class="mb-3 mt-8 px-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-paper/35">Contenus</p>
             <div class="space-y-1">
                 @foreach ($contentLinks as $link)
-                    @if (\Illuminate\Support\Facades\Route::has($link['route']))
+                    @if (\Illuminate\Support\Facades\Route::has($link['route']) && (empty($link['admin_only']) || auth()->user()?->isAdmin()))
                         <a href="{{ route($link['route']) }}" class="admin-nav-link {{ request()->routeIs($link['pattern']) ? 'admin-nav-link-active' : '' }}">
                             <span class="admin-nav-dot"></span>
                             {{ $link['label'] }}
@@ -126,5 +126,10 @@
         </main>
     </div>
 </div>
+
+{{-- Formulaires placés hors des formulaires d'édition (les formulaires imbriqués sont invalides en HTML) --}}
+@stack('admin-forms')
+
+<x-admin.confirm-dialog />
 </body>
 </html>

@@ -7,6 +7,7 @@ use App\Models\Partner;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class PartnerController extends Controller
@@ -75,6 +76,7 @@ class PartnerController extends Controller
         return $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'url' => ['nullable', 'url', 'max:255'],
+            'country' => ['nullable', Rule::in(array_keys(config('countries')))],
             'logo' => ['nullable', 'image', 'max:4096'],
             'order' => ['nullable', 'integer', 'min:0'],
         ]);

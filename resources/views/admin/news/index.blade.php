@@ -35,12 +35,11 @@
                             Publiée
                         @endif
                     </td>
-                    <td class="px-4 py-3 text-right space-x-3">
-                        <a href="{{ route('admin.news.edit', $article) }}" class="text-primary-600 hover:underline">Modifier</a>
-                        <form method="POST" action="{{ route('admin.news.destroy', $article) }}" class="inline" onsubmit="return confirm('Supprimer cette actualité ?');">
-                            @csrf @method('DELETE')
-                            <button class="text-clay-500 hover:underline">Supprimer</button>
-                        </form>
+                    <td class="px-4 py-3">
+                        <div class="admin-row-actions">
+                            <x-admin.edit-link :href="route('admin.news.edit', $article)" />
+                            <x-admin.delete-button :action="route('admin.news.destroy', $article)" message="Supprimer l’actualité « {{ $article->title }} » ?" />
+                        </div>
                     </td>
                 </tr>
             @empty

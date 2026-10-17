@@ -11,6 +11,7 @@ class Partner extends Model
         'name',
         'logo',
         'url',
+        'country',
         'order',
         'is_published',
     ];
@@ -18,6 +19,20 @@ class Partner extends Model
     protected $casts = [
         'is_published' => 'boolean',
     ];
+
+    public function countryName(): ?string
+    {
+        return $this->country ? config('countries.'.$this->country) : null;
+    }
+
+    public function flagUrl(): ?string
+    {
+        if (! $this->country || $this->country === 'int') {
+            return null;
+        }
+
+        return 'https://flagcdn.com/'.$this->country.'.svg';
+    }
 
     public function scopePublished(Builder $query): Builder
     {

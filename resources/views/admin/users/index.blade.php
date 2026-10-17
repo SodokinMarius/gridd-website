@@ -25,14 +25,13 @@
                     <td class="px-4 py-3">{{ $user->name }}</td>
                     <td class="px-4 py-3">{{ $user->email }}</td>
                     <td class="px-4 py-3">{{ $user->isAdmin() ? 'Administrateur' : 'Éditeur' }}</td>
-                    <td class="px-4 py-3 text-right space-x-3">
-                        <a href="{{ route('admin.users.edit', $user) }}" class="text-primary-600 hover:underline">Modifier</a>
-                        @if ($user->id !== auth()->id())
-                            <form method="POST" action="{{ route('admin.users.destroy', $user) }}" class="inline" onsubmit="return confirm('Supprimer cet utilisateur ?');">
-                                @csrf @method('DELETE')
-                                <button class="text-clay-500 hover:underline">Supprimer</button>
-                            </form>
-                        @endif
+                    <td class="px-4 py-3">
+                        <div class="admin-row-actions">
+                            <x-admin.edit-link :href="route('admin.users.edit', $user)" />
+                            @if ($user->id !== auth()->id())
+                                <x-admin.delete-button :action="route('admin.users.destroy', $user)" message="Supprimer le compte de {{ $user->name }} ?" />
+                            @endif
+                        </div>
                     </td>
                 </tr>
             @empty

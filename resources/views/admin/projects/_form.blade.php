@@ -46,10 +46,8 @@
             @foreach ($project->images as $image)
                 <div class="relative w-28 h-28">
                     <img src="{{ asset('storage/'.$image->path) }}" class="w-full h-full object-cover rounded-sm">
-                    <form method="POST" action="{{ route('admin.projects.images.destroy', $image) }}" onsubmit="return confirm('Supprimer cette photo ?');" class="absolute top-1 right-1">
-                        @csrf @method('DELETE')
-                        <button class="bg-ink/80 text-paper text-xs w-6 h-6 rounded-full">✕</button>
-                    </form>
+                    <x-admin.delete-button :action="route('admin.projects.images.destroy', $image)" message="Supprimer cette photo du projet ?"
+                        class="admin-icon-btn-overlay absolute right-1 top-1" />
                 </div>
             @endforeach
         </div>

@@ -12,6 +12,50 @@
     </div>
 </section>
 
+<section class="section-block history-section" id="parcours">
+    <div class="container-content">
+        <div class="section-header-row reveal">
+            <div class="max-w-2xl">
+                <p class="eyebrow mb-3">Notre parcours</p>
+                <h2 class="section-title">Depuis 2022, au plus près du terrain.</h2>
+            </div>
+            <p class="max-w-sm text-sm leading-7 text-ink/55">Audits, études d’impact et consultations : quelques missions qui ont forgé notre expérience.</p>
+        </div>
+
+        <div class="history-list">
+            @foreach ($institutional['missions'] as $index => $mission)
+                <article class="history-item reveal">
+                    <div class="history-photos">
+                        @foreach ($mission['photos'] as $photo)
+                            <figure class="history-photo">
+                                <img src="{{ asset($photo['src']) }}" alt="{{ $photo['alt'] }}" loading="lazy">
+                            </figure>
+                        @endforeach
+                    </div>
+                    <div class="history-body">
+                        <p class="history-index">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</p>
+                        <p class="history-type">{{ $mission['type'] }}</p>
+                        <h3 class="history-title">{{ $mission['titre'] }}</h3>
+                        <p class="history-place">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4" aria-hidden="true">
+                                <path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/>
+                                <circle cx="12" cy="9.5" r="2.5"/>
+                            </svg>
+                            {{ $mission['lieu'] }}
+                        </p>
+                        <p class="history-text">{{ $mission['description'] }}</p>
+                        @if (! empty($mission['galerie']))
+                            <a href="{{ route('gallery.index', ['categorie' => $mission['galerie']]) }}" class="history-link">
+                                Voir toutes les photos <span aria-hidden="true">→</span>
+                            </a>
+                        @endif
+                    </div>
+                </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
 <section class="section-block" id="vision">
     <div class="container-content about-grid-2">
         <div class="info-card">

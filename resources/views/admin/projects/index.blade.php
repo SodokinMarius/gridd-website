@@ -27,12 +27,11 @@
                     <td class="px-4 py-3">{{ $project->country }}</td>
                     <td class="px-4 py-3">{{ $project->year }}</td>
                     <td class="px-4 py-3">{{ $project->is_published ? 'Publié' : 'Brouillon' }}</td>
-                    <td class="px-4 py-3 text-right space-x-3">
-                        <a href="{{ route('admin.projects.edit', $project) }}" class="text-primary-600 hover:underline">Modifier</a>
-                        <form method="POST" action="{{ route('admin.projects.destroy', $project) }}" class="inline" onsubmit="return confirm('Supprimer ce projet ?');">
-                            @csrf @method('DELETE')
-                            <button class="text-clay-500 hover:underline">Supprimer</button>
-                        </form>
+                    <td class="px-4 py-3">
+                        <div class="admin-row-actions">
+                            <x-admin.edit-link :href="route('admin.projects.edit', $project)" />
+                            <x-admin.delete-button :action="route('admin.projects.destroy', $project)" message="Supprimer le projet « {{ $project->title }} » ?" />
+                        </div>
                     </td>
                 </tr>
             @empty

@@ -137,7 +137,9 @@
                 <a href="{{ route('admin.projects.create') }}" class="admin-quick-action">Ajouter une réalisation <span aria-hidden="true">＋</span></a>
                 <a href="{{ route('admin.news.create') }}" class="admin-quick-action">Publier une actualité <span aria-hidden="true">＋</span></a>
                 <a href="{{ route('admin.gallery.create') }}" class="admin-quick-action">Ajouter des photos <span aria-hidden="true">＋</span></a>
-                <a href="{{ route('admin.hero.create') }}" class="admin-quick-action">Modifier la bannière <span aria-hidden="true">＋</span></a>
+                @if (auth()->user()?->isAdmin())
+                    <a href="{{ route('admin.hero.create') }}" class="admin-quick-action">Modifier la bannière <span aria-hidden="true">＋</span></a>
+                @endif
             </div>
         </article>
 

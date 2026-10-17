@@ -27,12 +27,11 @@
                     <td class="px-4 py-3">{{ $member->position }}</td>
                     <td class="px-4 py-3">{{ $member->order }}</td>
                     <td class="px-4 py-3">{{ $member->is_published ? 'Publié' : 'Masqué' }}</td>
-                    <td class="px-4 py-3 text-right space-x-3">
-                        <a href="{{ route('admin.team.edit', $member) }}" class="text-primary-600 hover:underline">Modifier</a>
-                        <form method="POST" action="{{ route('admin.team.destroy', $member) }}" class="inline" onsubmit="return confirm('Supprimer ce membre ?');">
-                            @csrf @method('DELETE')
-                            <button class="text-clay-500 hover:underline">Supprimer</button>
-                        </form>
+                    <td class="px-4 py-3">
+                        <div class="admin-row-actions">
+                            <x-admin.edit-link :href="route('admin.team.edit', $member)" />
+                            <x-admin.delete-button :action="route('admin.team.destroy', $member)" message="Supprimer {{ $member->first_name }} {{ $member->last_name }} de l’équipe ?" />
+                        </div>
                     </td>
                 </tr>
             @empty

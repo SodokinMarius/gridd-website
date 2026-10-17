@@ -62,8 +62,12 @@ class DashboardController extends Controller
         $contentHealth = [
             ['label' => 'Projets publiés', 'value' => $stats['projects_published'], 'total' => max($stats['projects'], 1), 'tone' => 'green'],
             ['label' => 'Actualités visibles', 'value' => $stats['news_published'], 'total' => max($stats['news'], 1), 'tone' => 'clay'],
-            ['label' => 'Slides actives', 'value' => $stats['hero_slides'], 'total' => max(HeroSlide::count(), 1), 'tone' => 'ink'],
         ];
+
+        // La bannière d'accueil est gérée uniquement par les administrateurs.
+        if (auth()->user()?->isAdmin()) {
+            $contentHealth[] = ['label' => 'Slides actives', 'value' => $stats['hero_slides'], 'total' => max(HeroSlide::count(), 1), 'tone' => 'ink'];
+        }
 
         return view('admin.dashboard', compact(
             'stats',

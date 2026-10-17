@@ -29,12 +29,11 @@
                     <td class="px-4 py-3">{{ $slide->title }}</td>
                     <td class="px-4 py-3">{{ $slide->order }}</td>
                     <td class="px-4 py-3">{{ $slide->is_published ? 'Publiée' : 'Masquée' }}</td>
-                    <td class="px-4 py-3 text-right space-x-3">
-                        <a href="{{ route('admin.hero.edit', $slide) }}" class="text-primary-600 hover:underline">Modifier</a>
-                        <form method="POST" action="{{ route('admin.hero.destroy', $slide) }}" class="inline" onsubmit="return confirm('Supprimer cette slide ?');">
-                            @csrf @method('DELETE')
-                            <button class="text-clay-500 hover:underline">Supprimer</button>
-                        </form>
+                    <td class="px-4 py-3">
+                        <div class="admin-row-actions">
+                            <x-admin.edit-link :href="route('admin.hero.edit', $slide)" />
+                            <x-admin.delete-button :action="route('admin.hero.destroy', $slide)" message="Supprimer la slide « {{ $slide->title }} » ?" />
+                        </div>
                     </td>
                 </tr>
             @empty

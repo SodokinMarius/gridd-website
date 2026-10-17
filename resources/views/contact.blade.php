@@ -17,8 +17,8 @@
             <div class="info-card">
                 <h2 class="info-card-title text-xl">Nos coordonnées</h2>
                 <ul class="info-card-text space-y-4">
-                    <li><strong class="text-ink block">Adresse</strong>Abomey-Calavi, Bénin</li>
-                    <li><strong class="text-ink block">Téléphone</strong>+229 01 96 42 53 83</li>
+                    <li><strong class="text-ink block">Adresse</strong>Tankpè, Abomey-Calavi, Bénin</li>
+                    <li><strong class="text-ink block">Téléphone</strong><a href="tel:+2290196425383" class="hover:text-primary-700">+229 01 96 42 53 83</a><br><a href="tel:+2290195009445" class="hover:text-primary-700">+229 01 95 00 94 45</a></li>
                     <li><strong class="text-ink block">Email</strong>contact@gridd-cs.com</li>
                 </ul>
             </div>

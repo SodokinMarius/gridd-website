@@ -68,8 +68,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::resource('hero', AdminHeroSlideController::class)->except(['show']);
-
         Route::resource('projects', AdminProjectController::class)->except(['show']);
         Route::resource('partners', AdminPartnerController::class)->except(['show']);
         Route::delete('project-images/{image}', [AdminProjectController::class, 'destroyImage'])->name('projects.images.destroy');
@@ -88,6 +86,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Réservé aux administrateurs
         Route::middleware('admin')->group(function () {
+            Route::resource('hero', AdminHeroSlideController::class)->except(['show']);
             Route::resource('users', AdminUserController::class)->except(['show']);
         });
     });

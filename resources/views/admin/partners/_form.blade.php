@@ -5,6 +5,17 @@
     <input id="name" name="name" value="{{ old('name', $partner->name ?? '') }}" required>
 </div>
 
+<div class="form-field mb-5">
+    <label for="country">Pays</label>
+    <select id="country" name="country">
+        <option value="">— Non précisé —</option>
+        @foreach (config('countries') as $code => $countryName)
+            <option value="{{ $code }}" @selected(old('country', $partner->country ?? '') === $code)>{{ $countryName }}</option>
+        @endforeach
+    </select>
+    <p class="mt-1 text-xs text-ink/45">Affiché avec le drapeau sous le logo du partenaire.</p>
+</div>
+
 <div class="form-row mb-5">
     <div class="form-field">
         <label for="logo">Logo ou photo</label>
@@ -12,7 +23,7 @@
         @if ($partner?->logo)
             <img src="{{ \App\Support\Media::url($partner->logo) }}" alt="{{ $partner->name }}" class="mt-3 h-20 w-32 rounded-xl bg-stone-100 object-contain p-2">
         @endif
-        <p class="mt-1 text-xs text-ink/45">Format image, 4 Mo maximum.</p>
+        <p class="mt-1 text-xs text-ink/45">PNG à fond transparent de préférence, 4 Mo maximum.</p>
     </div>
     <div class="form-field">
         <label for="url">URL du site</label>
