@@ -2294,3 +2294,23 @@
         transform: none;
     }
 }
+
+
+@layer components {
+    /* Champ mot de passe avec bouton afficher / masquer (ajouté par app.js) */
+    .password-field {
+        @apply relative w-full;
+    }
+
+    .password-field input {
+        padding-right: 3.25rem !important;
+    }
+
+    .password-toggle {
+        @apply absolute right-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-xl text-ink/45 transition-colors hover:bg-primary-50 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500;
+    }
+
+    .password-toggle svg {
+        @apply h-5 w-5;
+    }
+}

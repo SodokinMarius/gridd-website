@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AccountCredentialsMail;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
+use Throwable;
 
 /**
  * Réservé au rôle Administrateur (voir middleware EnsureUserIsAdmin sur ces routes).
@@ -36,11 +39,19 @@ class UserController extends Controller
             'role' => ['required', 'in:admin,editor'],
         ]);
 
+        $temporaryPassword = $data['password'];
         $data['password'] = Hash::make($data['password']);
+        // Mot de passe provisoire : l'utilisateur choisira le sien à sa première connexion.
+        $data['must_change_password'] = true;
 
-        User::create($data);
+        $user = User::create($data);
 
-        return redirect()->route('admin.users.index')->with('status', 'Utilisateur créé.');
+        $status = 'Utilisateur créé.';
+        if ($request->boolean('send_credentials')) {
+            $status .= $this->sendCredentials($user, $temporaryPassword, true);
+        }
+
+        return redirect()->route('admin.users.index')->with('status', $status);
     }
 
     public function edit(User $user): View
@@ -57,15 +68,26 @@ class UserController extends Controller
             'password' => ['nullable', Password::defaults()],
         ]);
 
+        $isOtherUser = $user->id !== $request->user()->id;
+        $temporaryPassword = $data['password'] ?? null;
+
         if (! empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
+            // Réinitialisation par un administrateur : nouveau changement obligatoire
+            // (sauf s'il modifie son propre compte).
+            $data['must_change_password'] = $isOtherUser;
         } else {
             unset($data['password']);
         }
 
         $user->update($data);
 
-        return redirect()->route('admin.users.index')->with('status', 'Utilisateur mis à jour.');
+        $status = 'Utilisateur mis à jour.';
+        if ($temporaryPassword && $isOtherUser && $request->boolean('send_credentials')) {
+            $status .= $this->sendCredentials($user, $temporaryPassword, false);
+        }
+
+        return redirect()->route('admin.users.index')->with('status', $status);
     }
 
     public function destroy(Request $request, User $user): RedirectResponse
@@ -75,5 +97,21 @@ class UserController extends Controller
         $user->delete();
 
         return back()->with('status', 'Utilisateur supprimé.');
+    }
+
+    /**
+     * Envoie les identifiants provisoires par email et renvoie le complément du message de statut.
+     */
+    private function sendCredentials(User $user, string $temporaryPassword, bool $isNewAccount): string
+    {
+        try {
+            Mail::to($user->email)->send(new AccountCredentialsMail($user, $temporaryPassword, $isNewAccount));
+        } catch (Throwable $e) {
+            report($e);
+
+            return " L’email n’a pas pu être envoyé à {$user->email} : communiquez-lui le mot de passe provisoire vous-même.";
+        }
+
+        return " Ses identifiants lui ont été envoyés par email à {$user->email}.";
     }
 }

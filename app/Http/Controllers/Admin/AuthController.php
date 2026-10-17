@@ -10,9 +10,22 @@ use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    public function showLogin(): View
+    public function showLogin(Request $request): View|RedirectResponse
     {
-        return view('admin.auth.login');
+        $email = $request->query('email');
+        $user = $request->user();
+
+        if ($user) {
+            // Déjà connecté avec le bon compte (ou sans précision) : direction le tableau de bord.
+            if (! $email || strcasecmp($email, $user->email) === 0) {
+                return redirect()->route('admin.dashboard');
+            }
+
+            // Lien destiné à un autre compte : on propose de fermer la session en cours.
+            return view('admin.auth.login', ['email' => $email, 'connectedUser' => $user]);
+        }
+
+        return view('admin.auth.login', ['email' => $email, 'connectedUser' => null]);
     }
 
     public function login(Request $request): RedirectResponse
@@ -39,6 +52,9 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('admin.login');
+        // Changement de compte depuis la page de connexion : on garde l'email prérempli.
+        $email = $request->input('switch_to');
+
+        return redirect()->route('admin.login', filter_var($email, FILTER_VALIDATE_EMAIL) ? ['email' => $email] : []);
     }
 }

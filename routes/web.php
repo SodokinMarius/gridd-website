@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\JobPostingController as AdminJobPostingController
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\PartnerController as AdminPartnerController;
+use App\Http\Controllers\Admin\PasswordController as AdminPasswordController;
 use App\Http\Controllers\Admin\TeamMemberController as AdminTeamMemberController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -57,14 +58,20 @@ Route::post('/contact', [ContactController::class, 'store'])->middleware('thrott
 Route::prefix('admin')->name('admin.')->group(function () {
 
     // Connexion (accessible sans être authentifié)
+    // Page de connexion hors middleware « guest » : elle gère elle-même le cas d'une session
+    // déjà ouverte (lien reçu par email pour un autre compte que celui connecté).
+    Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('login');
     Route::middleware('guest')->group(function () {
-        Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('login');
         Route::post('/login', [AdminAuthController::class, 'login'])->name('login.attempt');
     });
 
     // Zone protégée : tout utilisateur connecté (admin ou éditeur)
-    Route::middleware('auth')->group(function () {
+    Route::middleware(['auth', 'password.changed'])->group(function () {
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+
+        // Mot de passe de l'utilisateur connecté
+        Route::get('/mot-de-passe', [AdminPasswordController::class, 'edit'])->name('password.edit');
+        Route::put('/mot-de-passe', [AdminPasswordController::class, 'update'])->name('password.update');
 
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 

@@ -82,6 +82,7 @@
                 <p class="truncate text-sm font-semibold text-paper">{{ auth()->user()?->name }}</p>
                 <p class="mt-1 text-xs text-paper/45">{{ auth()->user()?->isAdmin() ? 'Administrateur' : 'Éditeur' }}</p>
             </div>
+            <a href="{{ route('admin.password.edit') }}" class="admin-bottom-link {{ request()->routeIs('admin.password.*') ? 'text-paper' : '' }}">Mon mot de passe <span>→</span></a>
             <a href="{{ route('home') }}" target="_blank" class="admin-bottom-link">Voir le site public <span>↗</span></a>
             <form method="POST" action="{{ route('admin.logout') }}">
                 @csrf
@@ -99,9 +100,9 @@
                 </div>
                 <div class="hidden items-center gap-3 sm:flex">
                     <span class="rounded-full border border-primary-300/40 bg-primary-50 px-3 py-1.5 text-xs font-bold text-primary-700">{{ auth()->user()?->isAdmin() ? 'ADMIN' : 'ÉDITEUR' }}</span>
-                    <div class="flex h-10 w-10 items-center justify-center rounded-full bg-ink font-display font-bold text-paper">
+                    <a href="{{ route('admin.password.edit') }}" class="flex h-10 w-10 items-center justify-center rounded-full bg-ink font-display font-bold text-paper transition-colors hover:bg-primary-700" title="Mon mot de passe" aria-label="Mon mot de passe">
                         {{ mb_strtoupper(mb_substr(auth()->user()?->name ?? 'G', 0, 1)) }}
-                    </div>
+                    </a>
                 </div>
             </div>
         </header>

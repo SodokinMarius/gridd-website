@@ -24,7 +24,12 @@
                 <tr>
                     <td class="px-4 py-3">{{ $user->name }}</td>
                     <td class="px-4 py-3">{{ $user->email }}</td>
-                    <td class="px-4 py-3">{{ $user->isAdmin() ? 'Administrateur' : 'Éditeur' }}</td>
+                    <td class="px-4 py-3">
+                        {{ $user->isAdmin() ? 'Administrateur' : 'Éditeur' }}
+                        @if ($user->must_change_password)
+                            <span class="admin-status admin-status-warning ml-2" title="Le mot de passe provisoire n’a pas encore été remplacé">Mot de passe provisoire</span>
+                        @endif
+                    </td>
                     <td class="px-4 py-3">
                         <div class="admin-row-actions">
                             <x-admin.edit-link :href="route('admin.users.edit', $user)" />
